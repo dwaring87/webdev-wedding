@@ -1,0 +1,23 @@
+<template>
+  <div class="max-w-7xl mx-auto sm:my-12 sm:px-6 lg:px-8">
+    <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
+      <div class="absolute inset-0">
+        <img class="h-full w-full object-cover" src="/images/beach1.jpg" alt="Dundag Beach" />
+        <div class="absolute inset-0 bg-gray-500 mix-blend-multiply" />
+      </div>
+      <div class="relative h-full px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+        <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          <span class="block text-white py-2">Marissa &amp; David</span>
+          <span class="block text-emerald-500 py-2">September 16th, 2023</span>
+          <span class="block text-white py-2">Silver Queen Farm</span>
+          <span class="block text-white py-2">Trumansburg, NY</span>
+        </h1>
+      </div>
+      <div class="relative w-full px-4">
+        <div class="flex justify-end">
+          <NuxtLink class="btn" to="/rsvp">RSVP</NuxtLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
