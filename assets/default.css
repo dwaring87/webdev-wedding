@@ -2,6 +2,14 @@ body {
   @apply bg-gray-50;
 }
 
+h1 {
+  @apply text-2xl font-extrabold text-emerald-800 md:text-3xl lg:text-4xl my-2;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-8;
+}
+
 .btn {
   @apply my-3 w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-500 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-emerald-800 focus:ring-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0;
 }
