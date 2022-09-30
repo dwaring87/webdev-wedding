@@ -6,7 +6,7 @@
             <h2 class="text-3xl font-bold text-white sm:text-4xl">
               <span class="block">Visiting Killarney National Park?</span>
             </h2>
-            <p class="mt-4 text-lg leading-6 text-emerald-200">Take a self-guided bike tour!</p>
+            <p class="mt-4 text-lg leading-6 text-emerald-200">Take a self-guided bike tour! We highly recommend it.</p>
             <p class="mt-4 text-lg leading-6 text-emerald-200">Visit all of the best sites in Ireland's first national park, including <strong>Muckross Abbey</strong>, <strong>Torc Waterfall</strong>, and <strong>Dundag Beach</strong> (a great place to propose).</p>
             <a href="https://tour.killarneybicycletours.com/" class="mt-8 inline-flex items-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-emerald-600 shadow hover:bg-emerald-50">Take a Tour!</a>
           </div>
