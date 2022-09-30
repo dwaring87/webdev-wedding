@@ -1,7 +1,10 @@
-<script setup lang="ts">
-  const BASE_TITLE: string = "Marissa & David";
+<script setup>
+  const { getDetails } = useCMS();
+  const couple = await getDetails('couple');
+
+  const BASE_TITLE = couple;
   useHead({
-    titleTemplate: function(title: string) {
+    titleTemplate: function(title) {
       return title.includes(BASE_TITLE) ? title : title ? `${BASE_TITLE} - ${title}` : BASE_TITLE;
     },
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
