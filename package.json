@@ -6,7 +6,9 @@
     "preview": "nuxt preview",
     "build:static": "nuxt generate",
     "preview:static": "npx http-server dist/",
-    "clean": "nuxt cleanup"
+    "clean": "nuxt cleanup",
+    "pull": "git pull && yarn install",
+    "update": "yarn pull && yarn build:static"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.3",
