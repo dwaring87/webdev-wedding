@@ -7,8 +7,8 @@
   <div class="max-w-7xl mx-auto sm:my-12 sm:px-6 lg:px-8">
     <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
       <div class="absolute inset-0">
-        <img class="h-full w-full object-cover" src="/images/beach1.jpg" alt="Dundag Beach" />
-        <div class="absolute inset-0 bg-gray-500 mix-blend-multiply" />
+        <Image d-key="hero" class="h-full w-full object-cover" />
+        <div class="absolute inset-0 bg-gray-500 mix-blend-multiply"></div>
       </div>
       <br />
       <div class="relative h-full px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">

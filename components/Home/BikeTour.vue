@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="mx-auto my-auto p-4">
-          <img class="rounded-md border-2 border-white object-cover object-left-top mx-auto" src="/images/bikes.jpg" alt="Killarney National Park Bike Tour">
+          <Image d-key="tour" class="rounded-md border-2 border-white object-cover object-left-top mx-auto" />
         </div>
       </div>
     </div>

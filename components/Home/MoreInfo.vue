@@ -2,7 +2,7 @@
   <div class="container py-8">
     <div class="flex flex-wrap md:flex-nowrap justify-center gap-8">
       <div class="w-full max-w-lg ">
-        <img class="rounded-md shadow-md border-2 border-white" src="/images/beach2.jpg" />
+        <Image d-key="info" class="rounded-md shadow-md border-2 border-white" width="600" />
       </div>
       <div class="max-w-lg">
         <h1>More Information</h1>

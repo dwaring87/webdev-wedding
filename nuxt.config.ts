@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     strict: true
   },
 
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-directus'],
+  modules: ['@nuxt/image-edge', '@nuxtjs/tailwindcss', 'nuxt-directus'],
 
   vite: {
     plugins: [

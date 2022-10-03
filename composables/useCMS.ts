@@ -1,15 +1,14 @@
 export const useCMS = () => {
   const { getItems, getSingletonItem } = useDirectusItems();
-  const { getFiles, getThumbnail } = useDirectusFiles();
 
   /**
    * Get the key/value pairs of the requested details
    * @param keys The array of keys to get (return all details, if not defined)
-   * @returns The value
+   * @returns The value or an object of key/value pairs
    */
   const getDetails = async (keys?: string|string[]): Promise<string|Details> => {
     keys = typeof keys === 'string' ? [keys] : keys;
-    const properties: Detail[] = await getItems({
+    const details: Detail[] = await getItems({
       collection: 'details',
       params: {
         fields: ['key', 'value'],
@@ -19,13 +18,45 @@ export const useCMS = () => {
       }
     });
 
-    if ( properties && properties.length === 1 ) {
-      return properties[0].value;
+    if ( details && details.length === 1 ) {
+      return details[0].value;
     }
-    if ( properties && properties.length > 1 ) {
+    else if ( details && details.length > 1 ) {
       let rtn: Details = {};
-      properties.forEach((prop) => {
-        rtn[prop.key] = prop.value;
+      details.forEach((detail) => {
+        rtn[detail.key] = detail.value;
+      });
+      return rtn;
+    }
+    else {
+      return {};
+    }
+  }
+
+  /**
+   * Get the key/image id pairs of the requested photos
+   * @param keys The array of keys to get (return all photos, if not defined)
+   * @returns The image id or an object of key/image id pairs
+   */
+  const getPhotos = async(keys?: string|string[]): Promise<string|Photos> => {
+    keys = typeof keys === 'string' ? [keys] : keys;
+    const photos: Photos[] = await getItems({
+      collection: 'photos',
+      params: {
+        fields: ['key', 'image'],
+        filter: {
+          key: keys ? { "_in": keys } : undefined
+        }
+      }
+    });
+
+    if ( photos && photos.length === 1 ) {
+      return photos[0].image;
+    }
+    else if ( photos && photos.length > 1 ) {
+      let rtn: Photos = {};
+      photos.forEach((photo) => {
+        rtn[photo.key] = photo.image;
       });
       return rtn;
     }
@@ -36,7 +67,8 @@ export const useCMS = () => {
 
 
   return {
-    getDetails
+    getDetails,
+    getPhotos
   }
 }
 
@@ -54,4 +86,19 @@ type Detail = {
  */
 type Details = {
   [key: Detail["key"]]: Detail["value"];
+}
+
+/**
+ * A key/id pair from the Photos collection
+ */
+type Photo = {
+  key: string,
+  id: string
+}
+
+/**
+ * A collection of Photos (key/id pairs)
+ */
+type Photos = {
+  [key: Photo["key"]]: Photo["id"];
 }
