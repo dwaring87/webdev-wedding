@@ -1,5 +1,5 @@
 export const useCMS = () => {
-  const { getItems, getSingletonItem } = useDirectusItems();
+  const { getItems } = useDirectusItems();
 
   /**
    * Get the key/value pairs of the requested details

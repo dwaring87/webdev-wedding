@@ -14,15 +14,15 @@
       <div class="relative h-full px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
         <h1 class="text-center text-4xl drop-shadow-lg font-extrabold sm:text-5xl lg:text-6xl">
           <span class="block text-white py-2">{{ details.couple }}</span>
-          <span class="block text-blue-400 py-2">{{ details.date }}</span>
+          <span class="block text-cyan-500 py-2">{{ details.date }}</span>
           <span class="block text-white py-2">{{ details.venue_name }}</span>
           <span class="block text-white py-2">{{ details.venue_town }}</span>
         </h1>
       </div>
       <br />
-      <div class="relative w-full px-4">
+      <div class="relative w-full p-4">
         <div class="flex justify-end gap-4">
-          <!-- <NuxtLink class="btn" to="/rsvp">RSVP</NuxtLink> -->
+          <NuxtLink class="btn-dark" to="/rsvp">RSVP</NuxtLink>
         </div>
       </div>
     </div>
