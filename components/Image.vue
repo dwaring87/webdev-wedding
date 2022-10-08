@@ -46,5 +46,5 @@
 </script>
 
 <template>
-  <nuxt-img v-if="url" preload :src="url" />
+  <nuxt-img v-if="url" :src="url" />
 </template>
