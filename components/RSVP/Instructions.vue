@@ -4,9 +4,9 @@
 </script>
 
 <template>
-  <div class="relative overflow-hidden bg-emerald-800 py-10 px-6 sm:px-10 xl:p-12 rounded-t-md lg:rounded-tr-none lg:rounded-tl-md lg:rounded-bl-md">
+  <div>
     <h1 class="text-white">RSVP</h1>
-    <div class="instructions mt-6 max-w-3xl text-base text-emerald-100">
+    <div class="instructions mt-6 max-w-3xl text-base text-cyan-100">
       <p>
         To RSVP:
         <ol class="list-decimal pl-8">

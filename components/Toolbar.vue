@@ -1,4 +1,5 @@
 <script setup>
+  import RiRiding from '~icons/ri/riding-line';
   const { getDetails } = useCMS();
   const couple = await getDetails('couple');
 </script>
@@ -8,7 +9,7 @@
     <div class="container">
       <div class="h-14 flex justify-between items-center">
         <div class="flex items-center font-bold opacity-80 hover:opacity-100">
-          <NuxtLink to="/">{{ couple }}</NuxtLink>
+          <NuxtLink to="/"><RiRiding class="inline" />&nbsp;&nbsp;{{ couple }}</NuxtLink>
         </div>
       </div>
     </div>

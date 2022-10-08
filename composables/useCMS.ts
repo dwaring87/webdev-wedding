@@ -64,14 +64,57 @@ export const useCMS = () => {
       return {};
     }
   }
+  
+
+  /**
+   * Get the invitation name and associated Guests of the specified Invitation
+   * @param code Invite Code
+   * @returns Invitation and Guests
+   */
+  const getInvitation = async(code: string): Promise<Invitation|undefined> => {
+    const invitations: Invitation[] = await getItems({
+      collection: 'invitations',
+      params: {
+        fields: ['name', 'guests.id', 'guests.name', 'guests.email', 'guests.rsvp_welcome', 'guests.rsvp', 'guests.dietary_restrictions', 'guests.notes'],
+        filter: {
+          invite_code: { '_eq': code }
+        }
+      }
+    });
+    if ( invitations && invitations.length === 1 ) {
+      return invitations[0];
+    }
+  }
 
 
   return {
     getDetails,
-    getPhotos
+    getPhotos,
+    getInvitation
   }
 }
 
+
+/**
+ * A Guest
+ */
+type Guest = {
+  id: string,
+  name: string,
+  email: string,
+  rsvp_welcome: boolean,
+  rsvp: boolean,
+  dietary_restrictions: String[],
+  notes: string
+}
+
+/**
+ * An Invitation and its associated Guests
+ */
+type Invitation = {
+  name: string,
+  guests: Guest[]
+}
 
 /**
  * A key/value pair from the Details collection
@@ -101,4 +144,11 @@ type Photo = {
  */
 type Photos = {
   [key: Photo["key"]]: Photo["id"];
+}
+
+export type { 
+  Guest,
+  Invitation,
+  Detail,
+  Photo
 }
