@@ -1,5 +1,21 @@
 export const useCMS = () => {
-  const { getItems, updateItem } = useDirectusItems();
+  const { getItems, getSingletonItem, updateItem } = useDirectusItems();
+
+  /**
+   * Get the currently set Alert from the database
+   * @returns The title and message of an Alert
+   */
+  const getAlert = async(): Promise<Alert|undefined> => {
+    const alert: Alert = await getSingletonItem({
+      collection: 'alert',
+      params: {
+        fields: ['title', 'message']
+      }
+    });
+    if ( alert && alert.title && alert.message ) {
+      return alert;
+    }
+  }
 
   /**
    * Get the key/value pairs of the requested details
@@ -124,6 +140,7 @@ export const useCMS = () => {
 
 
   return {
+    getAlert,
     getDetails,
     getPhotos,
     getInvitation,
@@ -131,6 +148,14 @@ export const useCMS = () => {
   }
 }
 
+
+/**
+ * An Alert
+ */
+type Alert = {
+  title: string,
+  message: string
+}
 
 /**
  * A Guest
