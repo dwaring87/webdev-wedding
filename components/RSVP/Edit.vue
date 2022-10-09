@@ -1,8 +1,9 @@
 <script setup>
+  const { updateGuest } = useCMS();
   const props = defineProps({
     invitation: Object
   });
-  const emit = defineEmits(['cancel']);
+  const emit = defineEmits(['cancel', 'updated']);
 
   const DIET = {
     vegan: "Vegan",
@@ -16,6 +17,39 @@
   
   function cancel() {
     emit('cancel');
+  }
+
+  const saving = ref(false);
+  const errors = ref([]);
+  function save() {
+    saving.value = true;
+    errors.value = [];
+    let guests = props.invitation.guests;
+
+    guests.forEach(async (guest) => {
+      let id = guest.id;
+      let container = document.getElementById(id);
+      let name = container.getElementsByClassName('guest-name')[0].value;
+      let email = container.getElementsByClassName('guest-email')[0].value;
+      let rsvp_welcome = container.getElementsByClassName('guest-rsvp-welcome')[0].dataset.enabled === 'true';
+      let rsvp = container.getElementsByClassName('guest-rsvp')[0].dataset.enabled === 'true';
+      let diet = [];
+      let diet_els = container.getElementsByClassName('guest-diet');
+      for ( let i = 0; i < diet_els.length; i++ ) {
+        if ( diet_els[i].dataset.enabled && diet_els[i].dataset.enabled === 'true' ) diet.push(diet_els[i].dataset.code);
+      }
+      let notes = container.getElementsByClassName('guest-notes')[0].value;
+
+      let success = await updateGuest(id, name, email, rsvp_welcome, rsvp, diet, notes);
+      if ( !success ) {
+        errors.value.push(`<strong>ERROR:</strong> Could not update Guest <em>${name}</em>.  Please try again later.`);
+      }
+    });
+
+    saving.value = false;
+    if ( !errors.value || errors.value.length === 0 ) {
+      emit('updated');
+    }
   }
 </script>
 
@@ -35,7 +69,7 @@
       </div>
       <div class="group">
         <p>RSVP (Friday Welcome Dinner):</p>
-        <Toggle class="guest-rsvp-welome" :enabled="guest.rsvp_welcome" />
+        <Toggle class="guest-rsvp-welcome" :enabled="guest.rsvp_welcome" />
         <p class="info">Will you be attending the Welcome Dinner the Friday evening before the wedding?</p>
       </div>
       <div class="group">
@@ -58,7 +92,11 @@
 
     <div class="m-4 flex gap-4 justify-between">
       <button class="btn" @click="cancel">Cancel</button>
-      <button class="btn-dark">Save</button>
+      <button class="btn-dark" @click="save" :disabled="saving">Save</button>
+    </div>
+
+    <div class="alert" v-if="errors && errors.length > 0">
+      <p v-for="error in errors" v-html="error"></p>
     </div>
     
   </div>

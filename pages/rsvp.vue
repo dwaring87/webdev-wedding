@@ -2,16 +2,24 @@
   const loaded = ref(false);
   const invitation = ref();
   const code = ref();
+  const updated = ref(false);
 
   function onGetInvitation(i) {
     invitation.value = i;
-    history.pushState(null, null, '?invite=' + i.invite_code);
+    history.replaceState(history.state, null, '?invite=' + i.invite_code);
+    window.scrollTo(0, 0);
   }
 
   function onCancel() {
     invitation.value = undefined;
     code.value = undefined;
-    history.pushState(null, null, "?");
+    history.replaceState(history.state, null, "?");
+    window.scrollTo(0, 0);
+  }
+
+  function onUpdated() {
+    onCancel();
+    updated.value = true;
   }
 
   onMounted(async () => {
@@ -29,8 +37,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-3">
           <RSVPInstructions class="relative overflow-hidden bg-cyan-800 py-10 px-6 sm:px-10 xl:p-12 rounded-t-md lg:rounded-tr-none lg:rounded-tl-md lg:rounded-bl-md" />
           <div v-if="loaded" class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-            <RSVPLookup v-if="!invitation" :code="code" @getInvitation="onGetInvitation" />
-            <RSVPEdit v-if="invitation" :invitation="invitation" @cancel="onCancel" />
+            <RSVPUpdated v-if="updated" />
+            <RSVPEdit v-else-if="invitation" :invitation="invitation" @cancel="onCancel" @updated="onUpdated" />
+            <RSVPLookup v-else :code="code" @getInvitation="onGetInvitation" />
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 export const useCMS = () => {
-  const { getItems } = useDirectusItems();
+  const { getItems, updateItem } = useDirectusItems();
 
   /**
    * Get the key/value pairs of the requested details
@@ -86,11 +86,48 @@ export const useCMS = () => {
     }
   }
 
+  
+  /**
+   * Update the Guest Properties
+   * @param id Guest ID
+   * @param name Guest Name
+   * @param email Guest Email
+   * @param rsvp_welcome Guest RSVP to Welcome Dinner
+   * @param rsvp Guest RSVP to Wedding
+   * @param dietary_restrictions String of Guest's Dietary Restrictions
+   * @param notes Guest Notes
+   * @returns success flag
+   */
+  const updateGuest = async(id: string, name: string, email: string, rsvp_welcome: boolean, rsvp: boolean, dietary_restrictions: String[], notes: string): Promise<boolean> => {
+    try {
+      const guest: Guest = {
+        id,
+        name,
+        email,
+        rsvp_welcome,
+        rsvp,
+        dietary_restrictions,
+        notes
+      }
+      await updateItem<Guest>({
+        collection: "guests",
+        id: guest.id,
+        item: guest,
+      });
+      return true;
+    } catch (e) {
+      console.log("ERROR: Could not update Guest!");
+      console.log(e);
+      return false;
+    }
+  }
+
 
   return {
     getDetails,
     getPhotos,
-    getInvitation
+    getInvitation,
+    updateGuest
   }
 }
 
