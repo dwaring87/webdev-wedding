@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <div class="flex gap-4">
+  <div class="flex gap-4" :data-enabled="enabled">
     <button type="button" @click="enabled = !enabled" :class="{'bg-cyan-800': enabled, 'bg-gray-200': !enabled}" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-offset-2" role="switch" aria-checked="false">
       <span :class="{'translate-x-5': enabled, 'translate-x-0': !enabled}" class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out">
         <span :class="{'opacity-0': enabled, 'ease-out': enabled, 'duration-100': enabled, 'opacity-100': !enabled, 'ease-in': !enabled, 'duration-200': !enabled}" class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
