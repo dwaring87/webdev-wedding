@@ -4,9 +4,9 @@
 </script>
 
 <template>
-  <div>
+  <div class="bg-secondary py-4 px-6 sm:px-10 lg:py-12 rounded-t-md lg:rounded-tr-none lg:rounded-tl-md lg:rounded-bl-md">
     <h1 class="text-white">RSVP</h1>
-    <div class="instructions mt-6 max-w-3xl text-base text-cyan-100">
+    <div class="instructions mt-6 max-w-3xl text-base text-slate-100">
       <p>To RSVP:</p>
       <ol class="list-decimal pl-8">
         <li>Find the unique invite code from the invitation insert.  This will be a code like <code class="font-bold">fuzzy-purple-emu</code>.</li>

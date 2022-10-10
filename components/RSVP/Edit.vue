@@ -57,7 +57,7 @@
   <div>
     <h2>{{ invitation.name }}</h2>
 
-    <div class="mx-4 mt-4 mb-8 p-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="guest.id" v-for="(guest, index) in invitation.guests" :key="guest.id">
+    <div class="mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="guest.id" v-for="(guest, index) in invitation.guests" :key="guest.id">
       <div class="group">
         <p>Name:</p>
         <input class="guest-name" :value="guest.name" />
@@ -69,18 +69,18 @@
       </div>
       <div class="group">
         <p>RSVP (Friday Welcome Dinner):</p>
-        <Toggle class="guest-rsvp-welcome" :enabled="guest.rsvp_welcome" />
-        <p class="info">Will you be attending the Welcome Dinner the Friday evening before the wedding?</p>
+        <FormToggle class="guest-rsvp-welcome" :enabled="guest.rsvp_welcome" />
+        <p class="info">Will you be attending the welcome dinner (potluck) the Friday evening before the wedding?</p>
       </div>
       <div class="group">
         <p>RSVP (Saturday Ceremony &amp; Reception):</p>
-        <Toggle class="guest-rsvp" :enabled="guest.rsvp_welcome" />
+        <FormToggle class="guest-rsvp" :enabled="guest.rsvp_welcome" />
         <p class="info">Will you be attending the wedding ceremony and reception on Saturday?</p>
       </div>
       <div class="group">
         <p>Dietary Restrictions:</p>
         <div class="flex flex-wrap gap-2">
-          <Check class="guest-diet" v-for="(value, key) in DIET" :code="key" :label="value" :enabled="guest.dietary_restrictions && guest.dietary_restrictions.includes(key)" />
+          <FormCheck class="guest-diet" v-for="(value, key) in DIET" :code="key" :label="value" :enabled="guest.dietary_restrictions && guest.dietary_restrictions.includes(key)" />
         </div>
       </div>
       <div class="group">
@@ -104,12 +104,12 @@
 
 <style scoped>
   .group {
-    @apply flex flex-col gap-2 pb-8;
+    @apply flex flex-col gap-2 py-5;
   }
   .group p {
     @apply font-bold;
   }
   .group p.info {
-    @apply font-normal italic text-gray-600;
+    @apply text-sm font-normal italic text-gray-500;
   }
 </style>
