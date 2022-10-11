@@ -18,6 +18,25 @@ export const useCMS = () => {
   }
 
   /**
+   * Get a Page
+   * @returns The properties of a Page
+   */
+  const getPage = async(slug: string): Promise<Page|undefined> => {
+    let pages: Page[] = await getItems({
+      collection: 'pages',
+      params: {
+        fields: ['slug', 'title', 'content', 'date_updated'],
+        filter: {
+          slug: { "_eq": slug }
+        }
+      }
+    })
+    if ( pages && pages.length === 1 ) {
+      return pages[0];
+    }
+  }
+
+  /**
    * Get the key/value pairs of the requested details
    * @param keys The array of keys to get (return all details, if not defined)
    * @returns The value or an object of key/value pairs
@@ -141,6 +160,7 @@ export const useCMS = () => {
 
   return {
     getAlert,
+    getPage,
     getDetails,
     getPhotos,
     getInvitation,
@@ -155,6 +175,16 @@ export const useCMS = () => {
 type Alert = {
   title: string,
   message: string
+}
+
+/**
+ * A Page
+ */
+type Page = {
+  slug: string,
+  title: string,
+  content: string,
+  date_updated: Date
 }
 
 /**
@@ -212,6 +242,7 @@ type Photos = {
 export type { 
   Guest,
   Invitation,
+  Page,
   Detail,
   Photo
 }

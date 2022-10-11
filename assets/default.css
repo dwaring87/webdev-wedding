@@ -12,6 +12,9 @@ h2 {
 .container {
   @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-8;
 }
+.page {
+  @apply max-w-5xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8;
+}
 
 .bg-primary {
   @apply bg-gradient-to-b from-emerald-700 to-emerald-800;
@@ -21,7 +24,7 @@ h2 {
 }
 
 .btn {
-  @apply block mt-8 text-center bg-white px-5 py-3 text-base font-medium text-cyan-800 shadow w-full lg:w-fit rounded-md border border-gray-200 hover:bg-slate-100 cursor-pointer disabled:bg-slate-400 disabled:cursor-default;
+  @apply block mt-8 text-center bg-white px-5 py-3 text-sm md:text-base font-medium text-cyan-800 shadow w-full lg:w-fit rounded-md border border-gray-200 hover:bg-slate-100 cursor-pointer disabled:bg-slate-400 disabled:cursor-default;
 }
 .btn-dark {
   @apply btn bg-secondary text-slate-100 border-transparent hover:from-cyan-800 hover:to-cyan-800 disabled:bg-slate-400 !important;

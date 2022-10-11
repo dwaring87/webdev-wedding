@@ -13,7 +13,10 @@
             <NuxtLink to="/"><RiRiding class="inline" />&nbsp;&nbsp;{{ couple }}</NuxtLink>  
           </div>
           <div class="flex-grow"></div>
-          <NuxtLink to="/rsvp">RSVP</NuxtLink>
+          <div class="flex gap-8">
+            <NuxtLink to="/info">Info</NuxtLink>
+            <NuxtLink to="/rsvp">RSVP</NuxtLink>
+          </div>
         </div>
       </div>
     </nav>
