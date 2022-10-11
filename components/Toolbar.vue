@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <nav class="bg-primary text-emerald-100 shadow-md">
+    <nav class="bg-primary text-white shadow-md">
       <div class="container">
         <div class="h-14 flex justify-between items-center">
           <div class="flex items-center">
@@ -23,6 +23,6 @@
 
 <style scoped>
   a {
-    @apply font-bold opacity-80 hover:opacity-100;
+    @apply font-semibold opacity-80 hover:opacity-100;
   }
 </style>

@@ -1,4 +1,5 @@
 <script setup>
+  import RiMail from '~icons/ri/mail-check-fill';
   const { getDetails } = useCMS();
   const details = await getDetails();
 </script>
@@ -11,20 +12,30 @@
         <div class="absolute inset-0 bg-gray-500 mix-blend-multiply"></div>
       </div>
       <br />
-      <div class="relative h-full px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
-        <h1 class="text-center text-4xl drop-shadow-lg font-extrabold sm:text-5xl lg:text-6xl">
-          <span class="block text-white py-2">{{ details.couple }}</span>
-          <span class="block text-cyan-500 py-2">{{ details.date }}</span>
-          <span class="block text-white py-2">{{ details.venue_name }}</span>
-          <span class="block text-white py-2">{{ details.venue_town }}</span>
-        </h1>
+      <div class="relative h-full text-center px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+        <p class="hero-white">{{ details.couple }}</p>
+        <p class="hero-color">{{ details.date }}</p>
+        <p class="hero-white">{{ details.venue_name }}</p>
+        <p class="hero-white">{{ details.venue_town }}</p>
       </div>
       <br />
       <div class="relative w-full p-4">
         <div class="flex justify-end gap-4">
-          <NuxtLink class="btn-dark" to="/rsvp">RSVP</NuxtLink>
+          <NuxtLink class="btn" to="/rsvp">&nbsp;&nbsp;<RiMail class="inline" />&nbsp;RSVP&nbsp;&nbsp;</NuxtLink>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .hero {
+    @apply py-2 text-4xl font-extrabold tracking-normal md:tracking-wide sm:text-5xl lg:text-6xl drop-shadow-lg;
+  }
+  .hero-white {
+    @apply hero text-white;
+  }
+  .hero-color {
+    @apply hero text-transparent bg-clip-text bg-gradient-to-b from-cyan-400 to-cyan-500;
+  }
+</style>
