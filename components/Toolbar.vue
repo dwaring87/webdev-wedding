@@ -1,5 +1,8 @@
 <script setup>
   import RiRiding from '~icons/ri/riding-line';
+  import RiMail from '~icons/ri/mail-check-fill';
+  import RiInfo from '~icons/ri/information-fill';
+
   const { getDetails } = useCMS();
   const couple = await getDetails('couple');
 </script>
@@ -14,8 +17,8 @@
           </div>
           <div class="flex-grow"></div>
           <div class="flex gap-8">
-            <NuxtLink to="/info">Info</NuxtLink>
-            <NuxtLink to="/rsvp">RSVP</NuxtLink>
+            <NuxtLink to="/info"><RiInfo class='inline' />&nbsp;Info</NuxtLink>
+            <NuxtLink to="/rsvp"><RiMail class='inline' />&nbsp;RSVP</NuxtLink>
           </div>
         </div>
       </div>
