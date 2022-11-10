@@ -19,6 +19,10 @@ export default defineNuxtConfig({
   directus: {
     url: process.env.DIRECTUS_URL,
     token: process.env.DIRECTUS_TOKEN
+  },
+
+  publicRuntimeConfig: {
+    rsvp_enabled: process.env.RSVP
   }
 
 });

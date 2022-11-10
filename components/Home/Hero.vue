@@ -1,5 +1,6 @@
 <script setup>
   import RiMail from '~icons/ri/mail-check-fill';
+  const { rsvp_enabled } = useRuntimeConfig();
   const { getDetails } = useCMS();
   const details = await getDetails();
 </script>
@@ -21,7 +22,7 @@
       <br />
       <div class="relative w-full p-4">
         <div class="flex justify-end gap-4">
-          <NuxtLink class="btn" to="/rsvp">&nbsp;&nbsp;<RiMail class="inline" />&nbsp;RSVP&nbsp;&nbsp;</NuxtLink>
+          <NuxtLink v-if="rsvp_enabled && rsvp_enabled === 'true'" class="btn" to="/rsvp">&nbsp;&nbsp;<RiMail class="inline" />&nbsp;RSVP&nbsp;&nbsp;</NuxtLink>
         </div>
       </div>
     </div>
