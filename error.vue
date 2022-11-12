@@ -10,7 +10,7 @@
       {{ error.statusCode }}
     </span>
     <h1>{{ error.statusMessage }}</h1>
-    <p>It looks like Quercus ran away with this page.</p>
+    <p>It looks like Quercus ran away with this page.  We're working on putting it back ASAP.</p>
     <br />
     <NuxtLink to="/"><button class="btn-dark mx-auto">Return Home</button></NuxtLink>
     <br /><br />

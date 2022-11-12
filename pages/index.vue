@@ -1,7 +1,7 @@
 <template>
   <div>
+    <HomeInfo />
     <HomeHero />
-    <HomeMoreInfo />
     <HomeBikeTour />
   </div>
 </template>

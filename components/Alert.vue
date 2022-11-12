@@ -16,7 +16,7 @@
             <p class="flex-grow"><strong>{{ alert.title }}</strong></p>
             <RiClose @click="displayAlert = false" class="relative -top-3 -right-6 w-12 hover:cursor-pointer" />
           </div>
-          <div v-html="alert.message"></div>
+          <div class="w-full" v-html="alert.message"></div>
         </div>
       </div>
     </div>
