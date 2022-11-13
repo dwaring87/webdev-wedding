@@ -14,7 +14,7 @@
   <div class='content'>
     <h1>{{ title }}</h1>
     <div class='body' v-html="content"></div>
-    <div class="border-t border-gray-200 text-gray-400 text-center md:text-right">
+    <div class="mt-14 border-t border-gray-200 text-gray-400 text-center md:text-right">
       <p>Last Updated<br />{{ updated_string }}</p>
     </div>
   </div>
@@ -36,5 +36,8 @@
   .content img {
     max-width: 90%;
     @apply mx-auto my-2 lg:my-8 rounded-md shadow-md border border-gray-200;
+  }
+  .content a {
+    @apply text-emerald-800 underline;
   }
 </style>
