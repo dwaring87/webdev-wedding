@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="py-4 sm:mt-8 bg-cyan-800 sm:bg-transparent sm:border-b-2 border-cyan-800 border-opacity-20 max-w-full sm:max-w-2xl mx-auto">
+  <div class="py-4 sm:mt-8 bg-gradient-to-b from-emerald-700 to-emerald-800 sm:from-transparent sm:to-transparent sm:border-b-2 border-emerald-800 border-opacity-40 max-w-full sm:max-w-2xl mx-auto">
     <div class="flex flex-wrap md:flex-nowrap items-baseline justify-center gap-8">
       <NuxtLink to="/page/our-story" class="info-link">Our Story</NuxtLink>
       <NuxtLink to="/page/wedding-info" class="info-link">The Wedding</NuxtLink>
@@ -17,6 +17,6 @@
 
 <style scoped>
   .info-link {
-    @apply font-medium text-gray-200 hover:text-white sm:text-gray-800 sm:hover:text-cyan-800;
+    @apply font-medium text-gray-200 hover:text-white sm:text-emerald-800 sm:hover:text-emerald-900;
   }
 </style>
