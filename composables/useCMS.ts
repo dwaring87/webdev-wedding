@@ -110,7 +110,7 @@ export const useCMS = () => {
     const invitations: Invitation[] = await getItems({
       collection: 'invitations',
       params: {
-        fields: ['name', 'invite_code', 'guests.id', 'guests.name', 'guests.email', 'guests.rsvp_welcome', 'guests.rsvp', 'guests.dietary_restrictions', 'guests.notes'],
+        fields: ['name', 'invite_code', 'guests.id', 'guests.name', 'guests.email', 'guests.rsvp_welcome', 'guests.rsvp', 'guests.transportation', 'guests.dietary_restrictions', 'guests.notes'],
         filter: {
           invite_code: { '_eq': code }
         }
@@ -129,11 +129,12 @@ export const useCMS = () => {
    * @param email Guest Email
    * @param rsvp_welcome Guest RSVP to Welcome Dinner
    * @param rsvp Guest RSVP to Wedding
+   * @param transportation Guest Transportation Interest
    * @param dietary_restrictions String of Guest's Dietary Restrictions
    * @param notes Guest Notes
    * @returns success flag
    */
-  const updateGuest = async(id: string, name: string, email: string, rsvp_welcome: boolean, rsvp: boolean, dietary_restrictions: String[], notes: string): Promise<boolean> => {
+  const updateGuest = async(id: string, name: string, email: string, rsvp_welcome: boolean, rsvp: boolean, transportation: boolean, dietary_restrictions: String[], notes: string): Promise<boolean> => {
     try {
       const guest: Guest = {
         id,
@@ -141,6 +142,7 @@ export const useCMS = () => {
         email,
         rsvp_welcome,
         rsvp,
+        transportation,
         dietary_restrictions,
         notes
       }
@@ -196,6 +198,7 @@ type Guest = {
   email: string,
   rsvp_welcome: boolean,
   rsvp: boolean,
+  transportation: boolean,
   dietary_restrictions: String[],
   notes: string
 }

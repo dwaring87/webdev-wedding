@@ -33,6 +33,7 @@
       let email = container.getElementsByClassName('guest-email')[0].value;
       let rsvp_welcome = container.getElementsByClassName('guest-rsvp-welcome')[0].dataset.enabled === 'true';
       let rsvp = container.getElementsByClassName('guest-rsvp')[0].dataset.enabled === 'true';
+      let transportation = container.getElementsByClassName('guest-transportation')[0].dataset.enabled === 'true';
       let diet = [];
       let diet_els = container.getElementsByClassName('guest-diet');
       for ( let i = 0; i < diet_els.length; i++ ) {
@@ -40,7 +41,7 @@
       }
       let notes = container.getElementsByClassName('guest-notes')[0].value;
 
-      let success = await updateGuest(id, name, email, rsvp_welcome, rsvp, diet, notes);
+      let success = await updateGuest(id, name, email, rsvp_welcome, rsvp, transportation, diet, notes);
       if ( !success ) {
         errors.value.push(`<strong>ERROR:</strong> Could not update Guest <em>${name}</em>.  Please try again later.`);
       }
@@ -76,6 +77,11 @@
         <p>RSVP (Saturday Ceremony &amp; Reception):</p>
         <FormToggle class="guest-rsvp" :enabled="guest.rsvp_welcome" />
         <p class="info">Will you be attending the wedding ceremony and reception on Saturday?</p>
+      </div>
+      <div class="group">
+        <p>Transportation:</p>
+        <FormToggle class="guest-transportation" :enabled="guest.transportation" label_no="Not Interested" label_yes="Interested" />
+        <p class="info">Are you interested in transportation to and from the wedding venue?  We are looking into hiring a bus to bring guests to and from Ithaca.  Please let us know (for each person) if you're interested so we know how many seats we would need.  We'll reach out to those that are interested with the details.</p>
       </div>
       <div class="group">
         <p>Dietary Restrictions:</p>
