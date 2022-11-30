@@ -10,7 +10,7 @@
       <NuxtLink to="/page/wedding-info" class="info-link">The Wedding</NuxtLink>
       <NuxtLink to="/page/hotels" class="info-link">Hotels</NuxtLink>
       <NuxtLink to="/page/finger-lakes" class="info-link">The Finger Lakes</NuxtLink>
-      <NuxtLink v-if="rsvp_enabled" to="/rsvp" class="hidden sm:inline info-link"><RiMail class='inline' />&nbsp;RSVP</NuxtLink>
+      <NuxtLink v-if="rsvp_enabled && rsvp_enabled === 'true'" to="/rsvp" class="hidden sm:inline info-link"><RiMail class='inline' />&nbsp;RSVP</NuxtLink>
     </div>
   </div>
 </template>
