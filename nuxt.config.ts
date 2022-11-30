@@ -22,7 +22,8 @@ export default defineNuxtConfig({
   },
 
   publicRuntimeConfig: {
-    rsvp_enabled: process.env.RSVP
+    rsvp_enabled: process.env.RSVP,
+    ga_id: process.env.GA_ID
   }
 
 });

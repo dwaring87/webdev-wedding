@@ -1,8 +1,8 @@
 <script setup>
+  const { ga_id } = useRuntimeConfig();
   const { getDetails } = useCMS();
-  const couple = await getDetails('couple');
 
-  const BASE_TITLE = couple;
+  const BASE_TITLE = await getDetails('couple');;
   useHead({
     titleTemplate: function(title) {
       return title.includes(BASE_TITLE) ? title : title ? `${BASE_TITLE} - ${title}` : BASE_TITLE;
@@ -24,6 +24,10 @@
       { rel: 'manifest', href: '/site.webmanifest?v=2' },
       { rel: 'mask-icon', href: '/safari-pinned-tab.svg?v=3', color: '#065f46' },
       { rel: 'shortcut icon', href: '/favicon.ico?v=2' }
+    ],
+    script: [
+      { src: `https://www.googletagmanager.com/gtag/js?id=${ga_id}` },
+      { children: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag("config", "${ga_id}");` }
     ]
   });
 </script>
