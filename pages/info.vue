@@ -1,3 +1,9 @@
+<script setup>
+  useHead({
+    title: "More Information"
+  });
+</script>
+
 <template>
   <div class="container wedding-info py-8">
     <h1 class="text-center mb-8">More Information</h1>

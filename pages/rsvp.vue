@@ -29,6 +29,10 @@
     }
     loaded.value = true;
   });
+
+  useHead({
+    title: "RSVP"
+  });
 </script>
 
 <template>

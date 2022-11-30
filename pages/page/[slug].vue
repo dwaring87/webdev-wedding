@@ -7,6 +7,9 @@
   if ( !page ) {
     showError({ statusCode: 404, statusMessage: 'Page Not Found' })
   }
+  useHead({
+    title: page.title
+  });
 </script>
 
 <template>
