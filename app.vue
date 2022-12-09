@@ -5,7 +5,7 @@
   const BASE_TITLE = await getDetails('couple');;
   useHead({
     titleTemplate: function(title) {
-      return title.includes(BASE_TITLE) ? title : title ? `${BASE_TITLE} - ${title}` : BASE_TITLE;
+      return title && title.includes(BASE_TITLE) ? title : title ? `${BASE_TITLE} - ${title}` : BASE_TITLE;
     },
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
