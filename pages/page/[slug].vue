@@ -3,12 +3,15 @@
   const { getPage } = useCMS();
   
   let slug = route.params.slug;
-  const page = await getPage(slug);
-  if ( !page ) {
+  const { data:page } = await useAsyncData(`page-${slug}`, async () => {
+    return await getPage(slug);
+  });
+
+  if ( !page || !page.value ) {
     showError({ statusCode: 404, statusMessage: 'Page Not Found' })
   }
   useHead({
-    title: page.title
+    title: page.value.title
   });
 </script>
 
