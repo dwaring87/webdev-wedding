@@ -21,9 +21,11 @@ export default defineNuxtConfig({
     token: process.env.DIRECTUS_TOKEN
   },
 
-  publicRuntimeConfig: {
-    rsvp_enabled: process.env.RSVP,
-    ga_id: process.env.GA_ID
+  runtimeConfig: {
+    public: {
+      rsvp_enabled: process.env.RSVP,
+      ga_id: process.env.GA_ID
+    }
   }
 
 });
