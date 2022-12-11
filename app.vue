@@ -2,10 +2,13 @@
   const { ga_id } = useRuntimeConfig();
   const { getDetails } = useCMS();
 
-  const BASE_TITLE = await getDetails('couple');;
+  const { data:BASE_TITLE } = await useAsyncData('couple', async () => {
+    return await getDetails('couple');
+  });
+
   useHead({
-    titleTemplate: function(title) {
-      return title && title.includes(BASE_TITLE) ? title : title ? `${BASE_TITLE} - ${title}` : BASE_TITLE;
+    titleTemplate: (title) => {
+      return title && title.includes(BASE_TITLE.value) ? title : title ? `${BASE_TITLE.value} - ${title}` : BASE_TITLE.value;
     },
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',

@@ -1,7 +1,5 @@
 <script setup>
-  import { useRuntimeConfig } from "#app";
   const { getPhotos } = useCMS();
-  const config = useRuntimeConfig();
 
   const props = defineProps({
     dKey: String,
@@ -19,32 +17,21 @@
     }
   });
 
-  const params = setParams({
-    fit: props.fit,
-    width: props.width,
-    height: props.height,
-    quality: props.quality,
-    format: props.format,
-    access_token: config.directus.token
-  });
-
-  const id = props?.dId ? props.dId : props?.dKey ? await getPhotos(props.dKey) : undefined;
-  const url = id ? `${config.directus.url}/assets/${id}?${params.toString()}` : undefined;
-
-  function setParams(params) {
-    let p = [];
-    for ( let key in params ) {
-      if ( params.hasOwnProperty(key) ) {
-        let value = params[key];
-        if ( value && value !== '' ) {
-          p.push(`${key}=${value}`);
-        }
-      }
-    }
-    return p.join('&');
+  let id;
+  if ( props && props.dId ) {
+    id = props.dId;
+  }
+  else if ( props && props.dKey ) {
+    let { data } = await useAsyncData(`photo-id-${props.dKey}`, async () => {
+      return await getPhotos(props.dKey);
+    });
+    id = data.value;
   }
 </script>
 
 <template>
-  <nuxt-img v-if="url" :src="url" />
+  <nuxt-img v-if="id" provider="directus" :src="id" 
+    :width="width" :height="height" 
+    :fit="fit" :quality="quality" 
+    :format="format" />
 </template>

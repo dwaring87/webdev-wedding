@@ -6,7 +6,10 @@
   const route = useRoute();
   const { rsvp_enabled } = useRuntimeConfig();
   const { getDetails } = useCMS();
-  const couple = await getDetails('couple');
+
+  const { data:couple } = await useAsyncData('couple', async () => {
+    return await getDetails('couple');
+  });
 </script>
 
 <template>

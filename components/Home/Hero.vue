@@ -2,7 +2,10 @@
   import RiMail from '~icons/ri/mail-check-fill';
   const { rsvp_enabled } = useRuntimeConfig();
   const { getDetails } = useCMS();
-  const details = await getDetails();
+  
+  const { data:details } = await useAsyncData('details', async () => {
+    return await getDetails();
+  });
 </script>
 
 <template>
