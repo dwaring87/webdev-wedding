@@ -27,7 +27,9 @@ export default defineNuxtConfig({
         provider: '~/providers/directus',
         options: {
           baseURL: process.env.DIRECTUS_URL,
-          token: process.env.DIRECTUS_TOKEN
+          token: process.env.DIRECTUS_TOKEN,
+          output_dir: '.output/public/',
+          image_dir: '_images/'
         }
       }
     }
