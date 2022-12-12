@@ -8,7 +8,7 @@ export function getImage(src, { modifiers, baseURL, token, output_dir, image_dir
   const { width, height, format, fit, quality, ...providerModifiers } = modifiers
   const params = _setParams({width, height, format, fit, quality});
   
-  let url = _normalize(`${baseURL}/assets/${src}?access_token=${token}&${params}`);
+  let url = src.indexOf('http') === 0 ? src : _normalize(`${baseURL}/assets/${src}?access_token=${token}&${params}`);
 
   // Only generate the images when run on the server during prerendering
   if ( nuxtApp.payload.prerenderedAt && typeof window === 'undefined' ) {
