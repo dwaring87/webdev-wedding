@@ -12,7 +12,7 @@
   <div class="max-w-7xl mx-auto sm:my-12 sm:px-6 lg:px-8">
     <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
       <div class="absolute inset-0">
-        <Image d-key="hero" class="h-full w-full object-cover" />
+        <Image d-key="hero" :modifiers="{blur: 3}" class="h-full w-full object-cover" />
         <div class="absolute inset-0 bg-gray-500 mix-blend-multiply"></div>
       </div>
       <br />
