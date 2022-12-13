@@ -36,13 +36,31 @@ const operationsGenerator = createOperationsGenerator({
   formatter: (key, value) => `${key}=${value}`
 });
 
-export const getImage = (src, { 
+// Convert the Directus-specific modifiers into the required transforms format
+// https://docs.directus.io/reference/files.html#advanced-transformations
+const transformsGenerator = (transforms) => {
+  let rtn = [];
+  if ( transforms && typeof transforms === 'object' ) {
+    for ( const key in transforms ) {
+      if ( transforms.hasOwnProperty(key) ) {
+        let value = transforms[key];
+        rtn.push([key, value])
+      }
+    }
+  }
+  return rtn.length > 0 ? JSON.stringify(rtn) : undefined;
+}
+
+export const getImage = (
+  src, 
+  { 
     modifiers = {}, 
     baseURL, 
     token, 
     output_dir = '.output/public/', 
     image_dir = '_images/'
-} = {}) => {
+  } = {}
+) => {
   
   // Base URL is a required provider option (set in nuxt.config file)
   if ( !baseURL || baseURL === '' ) {
@@ -53,7 +71,10 @@ export const getImage = (src, {
   const { width, height, format, quality, fit, ...providerModifiers } = modifiers;
   const params = operationsGenerator({ width, height, format, quality, fit });
   const transforms = transformsGenerator(providerModifiers);
-  const url = withQuery(joinURL(baseURL, 'assets', src, params ? '?' + params : ''), { transforms, access_token: token});
+  const url = withQuery(
+    joinURL(baseURL, 'assets', src) + (params ? '?' + params : ''), 
+    { transforms, access_token: token }
+  );
 
   // TEMP: Generate the images when run on the server during prerendering
   if ( process.server && process.env.prerender ) {
@@ -77,21 +98,6 @@ export const getImage = (src, {
   else {
     return { url }
   }
-}
-
-// Convert the Directus-specific modifiers into the required transforms format
-// https://docs.directus.io/reference/files.html#advanced-transformations
-function transformsGenerator(transforms) {
-  let rtn = [];
-  if ( transforms && typeof transforms === 'object' ) {
-    for ( const key in transforms ) {
-      if ( transforms.hasOwnProperty(key) ) {
-        let value = transforms[key];
-        rtn.push([key, value])
-      }
-    }
-  }
-  return rtn.length > 0 ? JSON.stringify(rtn) : undefined;
 }
 
 // TEMP: Generate local static images for the specified remote URL
