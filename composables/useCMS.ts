@@ -124,35 +124,28 @@ export const useCMS = () => {
   
   /**
    * Update the Guest Properties
-   * @param id Guest ID
-   * @param name Guest Name
-   * @param email Guest Email
-   * @param rsvp_welcome Guest RSVP to Welcome Dinner
-   * @param rsvp Guest RSVP to Wedding
-   * @param transportation Guest Transportation Interest
-   * @param dietary_restrictions String of Guest's Dietary Restrictions
-   * @param notes Guest Notes
+   * @param guest The Guest to Update, with new properties set (id is required)
    * @returns success flag
    */
-  const updateGuest = async(id: string, name: string, email: string, rsvp_welcome: boolean, rsvp: boolean, transportation: boolean, dietary_restrictions: String[], notes: string): Promise<boolean> => {
+  const updateGuest = async(guest: Guest): Promise<boolean> => {
     try {
-      const guest: Guest = {
-        id,
-        name,
-        email,
-        rsvp_welcome,
-        rsvp,
-        transportation,
-        dietary_restrictions,
-        notes
+      if ( !guest || !guest.id ) {
+        console.log("ERROR: Guest ID is required!");
+        return false;
       }
+
+      console.log("==> UPDATE GUEST:");
+      console.log(guest);
+      return false;
+
       await updateItem<Guest>({
         collection: "guests",
         id: guest.id,
         item: guest,
       });
       return true;
-    } catch (e) {
+    } 
+    catch (e) {
       console.log("ERROR: Could not update Guest!");
       console.log(e);
       return false;

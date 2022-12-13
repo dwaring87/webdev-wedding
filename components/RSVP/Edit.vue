@@ -21,14 +21,15 @@
 
   const saving = ref(false);
   const errors = ref([]);
-  function save() {
+  const save = async () => {
     saving.value = true;
     errors.value = [];
     let guests = props.invitation.guests;
 
-    guests.forEach(async (guest) => {
+    for ( const guest of guests ) {
       let id = guest.id;
-      let container = document.getElementById(id);
+      let container = document.getElementById(`guest-container-${id}`);
+
       let name = container.getElementsByClassName('guest-name')[0].value;
       let email = container.getElementsByClassName('guest-email')[0].value;
       let rsvp_welcome = container.getElementsByClassName('guest-rsvp-welcome')[0].dataset.enabled === 'true';
@@ -41,11 +42,20 @@
       }
       let notes = container.getElementsByClassName('guest-notes')[0].value;
 
-      let success = await updateGuest(id, name, email, rsvp_welcome, rsvp, transportation, diet, notes);
+      let success = await updateGuest({
+        id, 
+        name: name !== guest.name ? name : undefined, 
+        email: email !== guest.email ? email : undefined,
+        rsvp_welcome: rsvp_welcome !== guest.rsvp_welcome ? rsvp_welcome : undefined,
+        rsvp: rsvp !== guest.rsvp ? rsvp : undefined,
+        transportation: transportation !== guest.transportation ? transportation : undefined,
+        diet: diet !== guest.diet ? diet : undefined,
+        notes: notes !== guest.notes ? notes : undefined
+      });
       if ( !success ) {
         errors.value.push(`<strong>ERROR:</strong> Could not update Guest <em>${name}</em>.  Please try again later.`);
       }
-    });
+    }
 
     saving.value = false;
     if ( !errors.value || errors.value.length === 0 ) {
@@ -58,7 +68,7 @@
   <div>
     <h2>{{ invitation.name }}</h2>
 
-    <div class="mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="guest.id" v-for="(guest, index) in invitation.guests" :key="guest.id">
+    <div class="mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="`guest-container-${guest.id}`" v-for="(guest) in invitation.guests" :key="guest.id">
       <div class="group">
         <p>Name:</p>
         <input class="guest-name" :value="guest.name" />
