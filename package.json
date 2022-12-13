@@ -17,6 +17,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "nuxt": "^3.0.0",
     "nuxt-directus": "^3.2.2",
+    "nuxt-runtime-compiler": "^1.1.0",
     "unplugin-icons": "^0.14.10"
   }
 }

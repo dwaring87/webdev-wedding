@@ -33,6 +33,7 @@ export function getImage(src, { modifiers, baseURL, token, output_dir, image_dir
 
 
 function _generate(url, full_path_image_dir, full_path_image) {
+  console.log("--> FETCHING IMAGE: " + url + " -> " + full_path_image);
   return new Promise(async (resolve, reject) => {
     const response = await fetch(url);
     const buffer = await response.arrayBuffer();

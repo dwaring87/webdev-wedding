@@ -465,7 +465,7 @@
   optionalDependencies:
     ipx "1.0.0-2"
 
-"@nuxt/kit@3.0.0", "@nuxt/kit@^3.0.0", "@nuxt/kit@^3.0.0-rc.14", "@nuxt/kit@^3.0.0-rc.9":
+"@nuxt/kit@3.0.0", "@nuxt/kit@^3.0.0", "@nuxt/kit@^3.0.0-rc.10", "@nuxt/kit@^3.0.0-rc.14", "@nuxt/kit@^3.0.0-rc.9":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.0.0.tgz#ae49b4e27b15285556cb88f35a56309c5ca0dd79"
   integrity sha512-7ZsOLt5s9a0ZleAIzmoD70JwkZf5ti6bDdxl6f8ew7Huxz+ni/oRfTPTX9TrORXsgW5CvDt6Q9M7IJNPkAN/Iw==
@@ -4031,13 +4031,20 @@ nuxi@3.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-nuxt-directus@^3.0.3:
+nuxt-directus@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/nuxt-directus/-/nuxt-directus-3.2.2.tgz#c5cc3a3d2d6c592b91c40a44ac113ee699cd780f"
   integrity sha512-NK7+EJkjlE85QjAVPqMyd7LAU2dlG4ILd97/b1WM6oS0xLkxGkI1lXb9ZZi5oI/qopjcAuf/vNVdypvmHWpghw==
   dependencies:
     "@nuxt/kit" "^3.0.0"
     standard-version "^9.3.2"
+
+nuxt-runtime-compiler@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nuxt-runtime-compiler/-/nuxt-runtime-compiler-1.1.0.tgz#009482f39c66156edf4f79a47169c294bfe34d68"
+  integrity sha512-UAnnP1kaYUVx4hDMSVrzCXIeeBC5ydi5gVxi76hRBJc4vIH30o5GqJ9SY+PHglhfBre0cY27FjIg0uRR7vNZJw==
+  dependencies:
+    "@nuxt/kit" "^3.0.0-rc.10"
 
 nuxt@^3.0.0:
   version "3.0.0"
