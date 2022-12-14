@@ -127,21 +127,31 @@ export const useCMS = () => {
    * @param guest The Guest to Update, with new properties set (id is required)
    * @returns success flag
    */
-  const updateGuest = async(guest: Guest): Promise<boolean> => {
+  const updateGuest = async(id: string, properties: Guest): Promise<boolean> => {
     try {
-      if ( !guest || !guest.id ) {
+      if ( !id || id === '' ) {
         console.log("ERROR: Guest ID is required!");
         return false;
       }
 
-      console.log("==> UPDATE GUEST:");
-      console.log(guest);
+      let key: keyof Guest;
+      for ( key in properties ) {
+        if ( properties.hasOwnProperty(key) ) {
+          let value = properties[key];
+          if ( typeof value === 'undefined' ) {
+            delete properties[key];
+          }
+        }
+      }
+
+      console.log("UPDATE GUEST PROPERTIES:");
+      console.log(properties);
       return false;
 
       await updateItem<Guest>({
         collection: "guests",
-        id: guest.id,
-        item: guest,
+        id: id,
+        item: properties,
       });
       return true;
     } 
@@ -186,14 +196,14 @@ type Page = {
  * A Guest
  */
 type Guest = {
-  id: string,
-  name: string,
-  email: string,
-  rsvp_welcome: boolean,
-  rsvp: boolean,
-  transportation: boolean,
-  dietary_restrictions: String[],
-  notes: string
+  id?: string,
+  name?: string,
+  email?: string,
+  rsvp_welcome?: boolean,
+  rsvp?: boolean,
+  transportation?: boolean,
+  dietary_restrictions?: String[],
+  notes?: string
 }
 
 /**

@@ -1,6 +1,7 @@
 <script setup>
   const { getInvitation } = useCMS();
-  const emit = defineEmits(['getInvitation']);
+  const { sleep } = useSleep();
+  const emit = defineEmits(['loading', 'getInvitation']);
   const props = defineProps({
     code: String
   });
@@ -20,12 +21,14 @@
       looking.value = true;
 
       let invitation = await getInvitation(invite_code.value);
-
-      looking.value = false;
-      not_found.value = invitation === undefined;
+      await sleep(500);
 
       if ( invitation ) {
+        looking.value = false;
         emit('getInvitation', invitation);
+      }
+      else {
+        not_found.value = true;
       }
     }
   }
@@ -39,15 +42,17 @@
 <template>
   <div>
     <h2>Find Your Invitation</h2>
-    <div class="flex flex-wrap gap-4 p-8">
+
+    <RSVPLoading v-if="looking" 
+      loading="Finding Invitation..." 
+      :error="not_found ? `Invitation Not Found.  The invite code <code>${invite_code}</code> does not exist.` : undefined"
+      @cancel="looking=false" 
+    />
+
+    <div v-else class="flex flex-wrap gap-4 p-8">
       <p><strong>Invite Code:</strong></p>
       <input type="text" v-model="invite_code" placeholder="fuzzy-purple-emu" @keyup.enter="lookup" autofocus />
-      <button class="btn-dark w-full" @click="lookup" :disabled="looking">
-        Find Invitation
-      </button>
-    </div>
-    <div class="alert mx-8" v-if="not_found">
-      Invitation Not Found
+      <button class="btn-dark w-full" @click="lookup">Find Invitation</button>
     </div>
   </div>
 </template>
