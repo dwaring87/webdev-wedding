@@ -26,7 +26,7 @@ export const useCMS = () => {
       return await getItems({
         collection: 'pages',
         params: {
-          fields: ['slug', 'title']
+          fields: ['slug', 'title', 'description']
         }
       });
     });

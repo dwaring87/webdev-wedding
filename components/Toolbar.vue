@@ -36,6 +36,6 @@
     @apply font-semibold opacity-70 hover:opacity-100 px-1;
   }
   .active {
-    @apply border-b-2 border-gray-100 border-opacity-30 opacity-90 hover:opacity-100 !important;
+    @apply border-b-2 border-gray-100 border-opacity-20 opacity-90 hover:opacity-100 !important;
   }
 </style>
