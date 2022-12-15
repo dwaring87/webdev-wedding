@@ -1,23 +1,28 @@
 <script setup>
-  const { getInvitation } = useCMS();
+  const { getInvitation, getDetails } = useCMS();
   const { sleep } = useSleep();
-  const emit = defineEmits(['loading', 'getInvitation']);
+  const emit = defineEmits(['getInvitation']);
   const props = defineProps({
     code: String
+  });
+
+  const { data:email } = await useAsyncData('contact_email', async () => {
+    return await getDetails("contact_email");
   });
 
   const invite_code = ref('');
   watch(invite_code, (new_invite_code) => {
     new_invite_code = new_invite_code.toLowerCase();
-    new_invite_code = new_invite_code.replace(/\s/g, "-");
+    new_invite_code = new_invite_code.replace(/[^a-z]/g, "-");
+    new_invite_code = new_invite_code.replace(/-+/g, "-");
     invite_code.value = new_invite_code;
   });
 
-  const not_found = ref(false);
+  const error = ref();
   const looking = ref(false);
-  async function lookup() {
+  const lookup = async () => {
     if ( invite_code.value && invite_code.value !== '' ) {
-      not_found.value = false;
+      error.value = undefined;
       looking.value = true;
 
       let invitation = await getInvitation(invite_code.value);
@@ -28,7 +33,7 @@
         emit('getInvitation', invitation);
       }
       else {
-        not_found.value = true;
+        error.value = `Invitation Not Found.<br /><br />The invite code <strong><code>${invite_code.value}</code></strong> does not exist.  Double check and make sure the spelling is correct.<br /><br />If you don't know your invite code, reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Help">${email.value}</a>.`;
       }
     }
   }
@@ -45,7 +50,7 @@
 
     <RSVPLoading v-if="looking" 
       loading="Finding Invitation..." 
-      :error="not_found ? `Invitation Not Found.  The invite code <code>${invite_code}</code> does not exist.` : undefined"
+      :error="error"
       @cancel="looking=false" 
     />
 

@@ -3,7 +3,7 @@
   const invitation = ref();
   const code = ref();
 
-  function onGetInvitation(i) {
+  const onGetInvitation = (i) => {
     invitation.value = i;
     history.replaceState(history.state, null, '?invite=' + i.invite_code);
     window.scrollTo(0, 0);
@@ -11,7 +11,7 @@
     gtag('event', 'rsvp', {code: i.invite_code, name: i.name});
   }
 
-  function onCancel() {
+  const onCancel = () => {
     invitation.value = undefined;
     code.value = undefined;
     history.replaceState(history.state, null, "?");

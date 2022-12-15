@@ -1,11 +1,15 @@
 <script setup>
-  const { updateGuest } = useCMS();
+  const { updateGuest, getDetails } = useCMS();
   const { sleep } = useSleep();
 
   const props = defineProps({
     invitation: Object
   });
   const emit = defineEmits(['cancel']);
+
+  const { data:email } = await useAsyncData('contact_email', async () => {
+    return await getDetails("contact_email");
+  });
 
   const DIET = {
     vegan: "Vegan",
@@ -35,6 +39,8 @@
     let guests = props.invitation.guests;
     window.scrollTo(0, 0);
 
+    let edit_rsvp = false;
+    let edit_transportation = false;
     let errors = [];
     for ( const guest of guests ) {
       let id = guest.id;
@@ -51,6 +57,13 @@
         if ( diet_els[i].dataset.enabled && diet_els[i].dataset.enabled === 'true' ) dietary_restrictions.push(diet_els[i].dataset.code);
       }
       let notes = container.getElementsByClassName('guest-notes')[0].value;
+
+      if ( rsvp || rsvp_welcome ) {
+        edit_rsvp = true;
+      }
+      if ( transportation ) {
+        edit_transportation = true;
+      }
 
       let success = await updateGuest(id, {
         name: name !== guest.name ? name : undefined, 
@@ -69,15 +82,22 @@
       await sleep(500);
 
       if ( !success ) {
-        errors.push(`<strong>ERROR:</strong> Could not update Guest <em>${name}</em>.  Please try again later.`);
+        errors.push(`Could not update Guest <strong><em>${name}</em></strong>.`);
+        gtag('event', 'rsvp_error', {invite: props.invitation.invite_code, guest: name});
       }
     }
 
     if ( errors.length > 0 ) {
-      error.value = errors.join('<br />');
+      error.value = errors.join(`<br />`) + `<br /><br />Please try again later.  If the issue persists, please reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Errors">${email.value}</a>.`;
     }
     else {
       success.value = "Guest Information Updated &mdash; Thank you!!";
+      if ( edit_rsvp ) {
+        success.value += "<br /><br />We look forward to seeing you!  View the <em>Wedding Information</em> page for more details about the weekend.";
+      }
+      if ( edit_transportation ) {
+        success.value += "<br /><br />We'll keep you updated on details if we're able to arrange transportation to/from the wedding venue.";
+      }
     }
   }
 </script>
@@ -86,11 +106,12 @@
   <div>
     <h2>{{ invitation.name }}</h2>
 
-    <RSVPLoading v-if="saving" 
-      loading="Updating Guest Information..." 
+    <RSVPLoading v-if="saving"
+      loading="Updating Guest Information..."
       :error="error"
       :success="success"
-      @cancel="saving=false" 
+      @cancel="saving=false"
+      continueLabel="Wedding Information"
       @continue="finish"
     />
 

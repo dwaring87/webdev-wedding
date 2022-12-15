@@ -146,7 +146,7 @@ export const useCMS = () => {
 
       console.log("UPDATE GUEST PROPERTIES:");
       console.log(properties);
-      return false;
+      return true;
 
       await updateItem<Guest>({
         collection: "guests",

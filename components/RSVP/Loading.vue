@@ -3,14 +3,19 @@
   import RiSuccess from '~icons/ri/checkbox-circle-fill';
 
   const props = defineProps({
-    loading: String,
-    error: {
+    loading: {
       type: String,
-      required: false
+      default: "Loading..."
     },
-    success: {
+    error: String,
+    success: String,
+    cancelLabel: {
       type: String,
-      required: false
+      default: "Back"
+    },
+    continueLabel: {
+      type: String,
+      default: "Continue"
     }
   });
 
@@ -29,7 +34,7 @@
         </svg>
       </div>
       <div v-else-if="error">
-        <RiError class="text-amber-600 text-6xl" />
+        <RiError class="text-amber-500 text-6xl" />
       </div>
       <div v-else-if="success">
         <RiSuccess class="text-emerald-600 text-6xl" />
@@ -38,22 +43,21 @@
 
     <!-- Loading Message -->
     <div class="w-full text-center text-lg font-bold text-slate-700" v-if="!error && !success">
-      <p v-if="loading">{{loading}}</p>
-      <p v-else>Loading...</p>
+      <p v-html="loading"></p>
     </div>
 
     <!-- Error Message -->
     <div class="w-full my-8" v-if="error">
       <div class="alert mx-8" v-html="error"></div>
       <br />
-      <button class="btn-dark mx-auto" @click="emit('cancel')">Cancel</button>
+      <button class="btn-dark mx-auto" @click="emit('cancel')" v-html="cancelLabel"></button>
     </div>
 
     <!-- Success Message -->
     <div class="w-full my-8" v-if="success">
       <div class="success mx-8" v-html="success"></div>
       <br />
-      <button class="btn-dark mx-auto" @click="emit('continue')">Continue</button>
+      <button class="btn-dark mx-auto" @click="emit('continue')" v-html="continueLabel"></button>
     </div>
   </div>
 </template>
