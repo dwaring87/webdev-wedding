@@ -2,9 +2,7 @@
   const route = useRoute();
   const { getDetails } = useCMS();
 
-  const { data:details } = await useAsyncData('details', async () => {
-    return await getDetails();
-  });
+  const details = await getDetails();
 </script>
 
 <template>

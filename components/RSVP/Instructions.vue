@@ -1,8 +1,6 @@
 <script setup>
   const { getDetails } = useCMS();
-  const { data:email } = await useAsyncData('contact_email', async () => {
-    return await getDetails("contact_email");
-  });
+  const email = await getDetails("contact_email");
 </script>
 
 <template>

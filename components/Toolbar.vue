@@ -7,12 +7,8 @@
   const { rsvp_enabled } = useRuntimeConfig();
   const { getDetails, getPages } = useCMS();
 
-  const { data:couple } = await useAsyncData('couple', async () => {
-    return await getDetails('couple');
-  });
-  const { data:pages } = await useAsyncData('pages', async () => {
-    return await getPages();
-  });
+  const couple = await getDetails('couple');
+  const pages = await getPages();
 </script>
 
 <template>
@@ -26,6 +22,7 @@
           <div class="flex-grow"></div>
           <div class="flex gap-4">
             <NuxtLink v-for="(page) in pages" :to="`/page/${page.slug}`" class="hidden md:inline" :class="{active: route.path.includes(page.slug)}">{{ page.title }}</NuxtLink>
+            <NuxtLink to="/info" class="inline md:hidden"><RiInfo class='inline' />&nbsp;Info</NuxtLink>
             <NuxtLink v-if="rsvp_enabled && rsvp_enabled === 'true'" to="/rsvp"><RiMail class='inline' />&nbsp;RSVP</NuxtLink>
           </div>
         </div>

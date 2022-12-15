@@ -1,14 +1,13 @@
 <script setup>
   const { getInvitation, getDetails } = useCMS();
   const { sleep } = useSleep();
-  const emit = defineEmits(['getInvitation']);
+
   const props = defineProps({
     code: String
   });
+  const emit = defineEmits(['getInvitation']);
 
-  const { data:email } = await useAsyncData('contact_email', async () => {
-    return await getDetails("contact_email");
-  });
+  const email = await getDetails("contact_email");
 
   const invite_code = ref('');
   watch(invite_code, (new_invite_code) => {
@@ -28,9 +27,9 @@
       let invitation = await getInvitation(invite_code.value);
       await sleep(500);
 
-      if ( invitation ) {
+      if ( invitation && invitation.value ) {
         looking.value = false;
-        emit('getInvitation', invitation);
+        emit('getInvitation', invitation.value);
       }
       else {
         error.value = `Invitation Not Found.<br /><br />The invite code <strong><code>${invite_code.value}</code></strong> does not exist.  Double check and make sure the spelling is correct.<br /><br />If you don't know your invite code, reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Help">${email.value}</a>.`;

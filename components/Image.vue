@@ -53,9 +53,7 @@
 
   // Lookup ID using provided key
   else if ( props && props.dKey ) {
-    let { data } = await useAsyncData(`photo-id-${props.dKey}`, async () => {
-      return await getPhotos(props.dKey);
-    });
+    const data = await getPhotos(props.dKey);
     id = data.value;
   }
 </script>

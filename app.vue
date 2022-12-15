@@ -2,9 +2,7 @@
   const { ga_id } = useRuntimeConfig();
   const { getDetails } = useCMS();
 
-  const { data:BASE_TITLE } = await useAsyncData('couple', async () => {
-    return await getDetails('couple');
-  });
+  const BASE_TITLE = await getDetails('couple');
 
   useHead({
     titleTemplate: (title) => {
