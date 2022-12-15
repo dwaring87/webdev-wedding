@@ -131,7 +131,7 @@
         </div>
         <div class="group">
           <p>RSVP (Saturday Ceremony &amp; Reception):</p>
-          <FormToggle class="guest-rsvp" :enabled="guest.rsvp_welcome" />
+          <FormToggle class="guest-rsvp" :enabled="guest.rsvp" />
           <p class="info">Will you be attending the wedding ceremony and reception on Saturday?</p>
         </div>
         <div class="group">
