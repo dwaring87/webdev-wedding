@@ -5,10 +5,13 @@
 
   const route = useRoute();
   const { rsvp_enabled } = useRuntimeConfig();
-  const { getDetails } = useCMS();
+  const { getDetails, getPages } = useCMS();
 
   const { data:couple } = await useAsyncData('couple', async () => {
     return await getDetails('couple');
+  });
+  const { data:pages } = await useAsyncData('pages', async () => {
+    return await getPages();
   });
 </script>
 
@@ -21,12 +24,8 @@
             <NuxtLink to="/"><RiRiding class="inline" />&nbsp;&nbsp;{{ couple }}</NuxtLink>
           </div>
           <div class="flex-grow"></div>
-          <div class="flex gap-8">
-            <NuxtLink to="/page/our-story" class="hidden md:inline">Our Story</NuxtLink>
-            <NuxtLink to="/page/wedding-info" class="hidden md:inline">The Wedding</NuxtLink>
-            <NuxtLink to="/page/hotels" class="hidden md:inline">Hotels</NuxtLink>
-            <NuxtLink to="/page/finger-lakes" class="hidden md:inline">The Finger Lakes</NuxtLink>
-            <NuxtLink to="/info" class="inline md:hidden"><RiInfo class='inline' />&nbsp;Info</NuxtLink>
+          <div class="flex gap-4">
+            <NuxtLink v-for="(page) in pages" :to="`/page/${page.slug}`" class="hidden md:inline" :class="{active: route.path.includes(page.slug)}">{{ page.title }}</NuxtLink>
             <NuxtLink v-if="rsvp_enabled && rsvp_enabled === 'true'" to="/rsvp"><RiMail class='inline' />&nbsp;RSVP</NuxtLink>
           </div>
         </div>
@@ -37,6 +36,9 @@
 
 <style scoped>
   a {
-    @apply font-semibold opacity-80 hover:opacity-100;
+    @apply font-semibold opacity-70 hover:opacity-100 px-1;
+  }
+  .active {
+    @apply border-b-2 border-gray-100 border-opacity-30 opacity-90 hover:opacity-100 !important;
   }
 </style>

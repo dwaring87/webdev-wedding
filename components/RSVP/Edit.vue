@@ -36,13 +36,13 @@
     saving.value = true;
     error.value = undefined;
     success.value = undefined;
-    let guests = props.invitation.guests;
     window.scrollTo(0, 0);
 
     let edit_rsvp = false;
     let edit_transportation = false;
     let errors = [];
-    for ( const guest of guests ) {
+
+    for ( const guest of props.invitation.guests ) {
       let id = guest.id;
       let container = document.getElementById(`guest-container-${id}`);
 
@@ -88,7 +88,8 @@
     }
 
     if ( errors.length > 0 ) {
-      error.value = errors.join(`<br />`) + `<br /><br />Please try again later.  If the issue persists, please reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Errors">${email.value}</a>.`;
+      error.value = errors.join(`<br />`);
+      error.value += `<br /><br />Please try again later.  If the issue persists, please reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Errors">${email.value}</a>.`;
     }
     else {
       success.value = "Guest Information Updated &mdash; Thank you!!";

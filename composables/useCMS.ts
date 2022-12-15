@@ -18,6 +18,19 @@ export const useCMS = () => {
   }
 
   /**
+   * Get the metadata (title and slug) for all Pages
+   * @returns The metadata of all Pages
+   */
+  const getPages = async(): Promise<Page[]|undefined> => {
+    return await getItems({
+      collection: 'pages',
+      params: {
+        fields: ['slug', 'title']
+      }
+    })
+  }
+
+  /**
    * Get a Page
    * @returns The properties of a Page
    */
@@ -165,6 +178,7 @@ export const useCMS = () => {
 
   return {
     getAlert,
+    getPages,
     getPage,
     getDetails,
     getPhotos,
