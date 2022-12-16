@@ -8,7 +8,7 @@
     <h1 class="text-white">RSVP</h1>
     <div class="instructions mt-6 max-w-3xl text-base text-slate-100">
       <p>To RSVP:</p>
-      <ol class="list-decimal pl-8">
+      <ol>
         <li>Find the unique invite code from the invitation insert.  This will be a code like <code class="font-bold">fuzzy-purple-emu</code>.</li>
         <li>Enter the code</li>
         <li>RSVP for each of the guests associated with the invitation</li>
