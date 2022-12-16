@@ -43,3 +43,7 @@ input, textarea {
 .success {
   @apply bg-emerald-600 text-emerald-100 border-2 border-emerald-800 rounded-md shadow-md p-4;
 }
+
+ol {
+  @apply list-decimal ml-8;
+}
