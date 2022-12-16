@@ -20,10 +20,17 @@
             <NuxtLink to="/"><RiRiding class="inline" />&nbsp;&nbsp;{{ couple }}</NuxtLink>
           </div>
           <div class="flex-grow"></div>
-          <div class="flex gap-4">
-            <NuxtLink v-for="(page) in pages" :to="`/page/${page.slug}`" class="hidden md:inline" :class="{active: route.path.includes(page.slug)}">{{ page.title }}</NuxtLink>
-            <NuxtLink to="/info" class="inline md:hidden"><RiInfo class='inline' />&nbsp;Info</NuxtLink>
-            <NuxtLink v-if="rsvp_enabled && rsvp_enabled === 'true'" to="/rsvp"><RiMail class='inline' />&nbsp;RSVP</NuxtLink>
+          <div class="flex gap-2 lg:gap-4">
+            <NuxtLink v-for="(page) in pages" :to="`/page/${page.slug}`" 
+                class="hidden md:inline" :class="{active: route.path.includes(page.slug)}">
+              {{ page.title }}
+            </NuxtLink>
+            <NuxtLink to="/info" class="inline md:hidden">
+              <RiInfo class='inline' />&nbsp;Info
+            </NuxtLink>
+            <NuxtLink v-if="rsvp_enabled && rsvp_enabled === 'true'" to="/rsvp">
+              <RiMail class='inline' />&nbsp;RSVP
+            </NuxtLink>
           </div>
         </div>
       </div>

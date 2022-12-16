@@ -173,16 +173,12 @@ export const useCMS = () => {
         }
       }
 
-      console.log("UPDATE GUEST PROPERTIES:");
-      console.log(properties);
-      return true;
-
-      await updateItem<Guest>({
+      const resp = await updateItem({
         collection: "guests",
         id: id,
         item: properties,
       });
-      return true;
+      return resp && resp.id === id;
     } 
     catch (e) {
       console.log("ERROR: Could not update Guest!");
