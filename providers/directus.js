@@ -156,8 +156,6 @@ function _md5(inputString) {
 // TEMP: Generate local static images for the specified remote URL
 function _generate(url, full_path_image_dir, full_path_image) {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(url);
-    const buffer = await response.arrayBuffer();
 
     // Make image directory, if not created
     try {
@@ -175,6 +173,9 @@ function _generate(url, full_path_image_dir, full_path_image) {
     }
     catch (err) {
       try {
+        console.log(`curl "${url}" > ${full_path_image}`);
+        const response = await fetch(url);
+        const buffer = await response.arrayBuffer();
         await fs.writeFile(full_path_image, new Buffer.from(buffer));
       }
       catch (err2) {
