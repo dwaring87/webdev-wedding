@@ -2,7 +2,7 @@ import { joinURL, withQuery } from 'ufo';
 import { createOperationsGenerator } from '#image';
 
 // TEMP: used for the ad-hoc image generation
-import fs from 'fs/promises';
+import { useNuxt } from '@nuxt/kit';
 
 // TEMP: The full path to the project's root directory
 const root_dir = import.meta.url.substring(0, import.meta.url.indexOf('.nuxt'));
@@ -53,14 +53,15 @@ const transformsGenerator = (transforms) => {
 export const getImage = (
   src, 
   { 
-    modifiers = {}, 
-    baseURL, 
-    token, 
-    output_dir = '.output/public/', 
+    modifiers = {},
+    baseURL,
+    token,
+    output_dir = '.output/public/',
     image_dir = '_images/'
   } = {}
 ) => {
-  
+  const nuxt = useNuxt()
+
   // Base URL is a required provider option (set in nuxt.config file)
   if ( !baseURL || baseURL === '' ) {
     throw "[ERROR] Directus image provider baseURL option is required!";
@@ -90,17 +91,10 @@ export const getImage = (
     const full_path_image_dir = _normalize(`${root_dir}/${output_dir}/${image_dir}`);   // absolute path on the server to the image directory
     const full_path_image = _normalize(`${full_path_image_dir}/${image_name}`);         // absolute path on the server to the image file
 
-    // During Pre-render: Download the image to the server
+    // During Pre-render: Stash the image info to be downloaded
     if ( process.env.prerender ) {
-
-      // This is a problem: getImage can't be run as async and issues can occur 
-      // if the function returns before the image generation is complete
-      _generate(url, full_path_image_dir, full_path_image)
-        .catch((err) => {
-          console.log("--> [ERROR] " + hash + " = " + url);
-          console.log(err);
-        });
-
+      nuxt.options.image.providers.directus.options._image_dir = full_path_image_dir;
+      nuxt.options.image.providers.directus.options._images[hash] = { url, full_path_image };
     }
 
     return { url : local_path_image }
@@ -151,40 +145,6 @@ function _md5(inputString) {
       b=ii(b,c,d,a,x[i+ 9],21, -343485551);a=ad(a,olda);b=ad(b,oldb);c=ad(c,oldc);d=ad(d,oldd);
   }
   return rh(a)+rh(b)+rh(c)+rh(d);
-}
-
-// TEMP: Generate local static images for the specified remote URL
-function _generate(url, full_path_image_dir, full_path_image) {
-  return new Promise(async (resolve, reject) => {
-
-    // Make image directory, if not created
-    try {
-      let f = await fs.open(full_path_image_dir);
-      f.close();
-    }
-    catch (err) {
-      await fs.mkdir(full_path_image_dir);
-    }
-
-    // Write the image, if it doesn't already exist
-    try {
-      let f = await fs.open(full_path_image);
-      f.close();
-    }
-    catch (err) {
-      try {
-        console.log(`curl "${url}" > ${full_path_image}`);
-        const response = await fetch(url);
-        const buffer = await response.arrayBuffer();
-        await fs.writeFile(full_path_image, new Buffer.from(buffer));
-      }
-      catch (err2) {
-        return reject(err2);
-      }
-    }
-
-    return resolve();
-  });
 }
 
 // TEMP: normalize file URLs
