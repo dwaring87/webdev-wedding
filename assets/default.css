@@ -38,7 +38,7 @@ input, textarea {
 }
 
 .card {
-  @apply bg-gradient-to-b from-white to-gray-100 m-8 border border-white shadow-md rounded-md;
+  @apply bg-gradient-to-b from-white to-gray-100 my-8 mx-1 sm:mx-2 md:mx-8 border border-white shadow-md rounded-md;
 }
 .card-title {
   @apply bg-gradient-to-b from-emerald-700 to-emerald-800 opacity-90 p-4 rounded-t-md;
@@ -60,7 +60,7 @@ input, textarea {
   @apply mx-auto;
 }
 .split-right img {
-  @apply max-w-full lg:max-w-sm !important;
+  @apply mx-auto w-max max-h-36 md:max-h-48 lg:max-w-sm lg:max-h-fit !important;
 }
 
 .alert {
