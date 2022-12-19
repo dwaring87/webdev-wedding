@@ -12,7 +12,7 @@
     charset: 'utf-8',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'description', content: 'Marissa and David are getting married! Join the celebration on Saturday, September 26th, 2023 at Silver Queen Farm in Trumansburg.', hid: 'description' },
+      { name: 'description', content: 'Marissa and David are getting married! Join the celebration on Saturday, September 16th, 2023 at Silver Queen Farm in Trumansburg.', hid: 'description' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'msapplication-TileColor', content: '#065f46' },
       { name: 'theme-color', content: '#065f46' }
