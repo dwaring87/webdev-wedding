@@ -34,8 +34,8 @@
   <div class="page">
       <div class="relative bg-white border-2 border-gray-100 rounded-md shadow-xl">
         <div class="grid grid-cols-1 lg:grid-cols-3">
-          <RSVPInstructions class="relative overflow-hidden" />
-          <div v-if="loaded" class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+          <RSVPInstructions :invitationFound="!!invitation" class="relative overflow-hidden" />
+          <div v-if="loaded" class="py-10 px-4 md:px-8 sm:px-10 lg:col-span-2 xl:p-12">
             <RSVPEdit v-if="invitation" :invitation="invitation" @cancel="onCancel" />
             <RSVPLookup v-else :code="code" @getInvitation="onGetInvitation" />
           </div>

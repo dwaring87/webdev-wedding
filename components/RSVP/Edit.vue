@@ -114,7 +114,7 @@
     />
 
     <div v-show="!saving">
-      <div class="mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="`guest-container-${guest.id}`" v-for="(guest) in invitation.guests" :key="guest.id">
+      <div class="mx-1 sm:mx-2 md:mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="`guest-container-${guest.id}`" v-for="(guest) in invitation.guests" :key="guest.id">
         <div class="group">
           <p>Name:</p>
           <input class="guest-name" :value="guest.name" />
@@ -137,7 +137,7 @@
         <div class="group">
           <p>Transportation:</p>
           <FormToggle class="guest-transportation" :enabled="guest.transportation" label_no="Not Interested" label_yes="Interested" />
-          <p class="info">Are you interested in transportation to and from the wedding venue?  We are looking into hiring a bus to bring guests to and from Ithaca.  Please let us know (for each person) if you're interested so we know how many seats we would need.  We'll reach out to those that are interested with the details.</p>
+          <p class="info">Are you interested in possible transportation to and from the wedding venue?  We are looking into hiring a bus to bring guests to and from Ithaca.  Please let us know (for each person) if you're interested so we know how many seats we would need.  We'll reach out to those that are interested with the details.</p>
         </div>
         <div class="group">
           <p>Dietary Restrictions:</p>
