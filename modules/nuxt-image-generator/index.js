@@ -23,8 +23,11 @@ export default defineNuxtModule({
     addImportsDir(resolve(runtimeDir, 'composables'));
 
     // Set runtime options
-    nuxt.options.runtimeConfig.public.nuxt_image_generator = { root_dir: nuxt.options.rootDir, output_dir, image_dir };
-    nuxt.options.image.static_images = { };
+    const cache = resolve(nuxt.options.rootDir, ".static_images.txt");
+    nuxt.options.runtimeConfig.public.nuxt_image_generator = { root_dir: nuxt.options.rootDir, cache, output_dir, image_dir };
+
+    // Remove existing cache file
+    fs.rm(cache, { force: true });
 
     // Set Close Hook (generate local images)
     nuxt.hook('close', generateImages);
@@ -39,11 +42,22 @@ export default defineNuxtModule({
 const generateImages = async (nuxt) => {
 
   // Get runtime options
-  const { root_dir, output_dir, image_dir } = nuxt.options.runtimeConfig.public.nuxt_image_generator;
-  const images = nuxt.options.image.static_images;
+  const { cache, root_dir, output_dir, image_dir } = nuxt.options.runtimeConfig.public.nuxt_image_generator;
 
   // Generate the during nuxt static generation
-  if ( nuxt.options._generate && Object.keys(images).length > 0 ) {
+  if ( nuxt.options._generate ) {
+
+    // Read cache file and parse into images object
+    const images = {};
+    const cache_contents = await fs.readFile(cache, 'utf-8');
+    const lines = cache_contents.split(/\r?\n/);
+    lines.forEach((line) => {
+      const [hash, url, image_name] = line.split('\t');
+      if ( hash && hash !== '' && url && image_name ) {
+        images[hash] = { url, image_name };
+      }
+    });
+
     console.log("Generating " + Object.keys(images).length + " static images...");
     const full_path_image_dir = (`${root_dir}/${output_dir}/${image_dir}`).replaceAll('//', '/');
 

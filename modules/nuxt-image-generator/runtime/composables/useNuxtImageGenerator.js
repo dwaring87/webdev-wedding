@@ -1,4 +1,4 @@
-import { useNuxt } from "@nuxt/kit";
+import fs from 'fs/promises';
 
 export const useNuxtImageGenerator = () => {
 
@@ -18,8 +18,7 @@ export const useNuxtImageGenerator = () => {
 
     // Save image properties for prerender
     if ( process.env.prerender ) {
-      const nuxt = useNuxt();
-      nuxt.options.image.static_images[hash] = { url, image_name };
+      fs.appendFile(props.cache, [hash, url, image_name].join('\t') + '\n', { encoding: 'utf-8', flag: 'as' });
     }
 
     return image_web_path;
