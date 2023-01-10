@@ -33,6 +33,7 @@
       }
       else {
         error.value = `Invitation Not Found.<br /><br />The invite code <strong><code>${invite_code.value}</code></strong> does not exist.  Double check and make sure the spelling is correct.<br /><br />If you don't know your invite code, reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Help">${email.value}</a>.`;
+        useTrackEvent('RSVP Not Found', { props: { code: invite_code.value } });
       }
     }
   }

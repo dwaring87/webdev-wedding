@@ -13,8 +13,8 @@ export default defineNuxtConfig({
   },
 
   plausible: {
-    domain: 'killarneybicycletours.com',
-    apiHost: 'https://a.davidwaring.net',
+    domain: process.env.PLAUSIBLE_DOMAIN,
+    apiHost: process.env.PLAUSIBLE_HOST,
     autoPageviews: true,
     hashMode: true,
     trackLocalhost: true

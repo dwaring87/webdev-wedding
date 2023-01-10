@@ -80,6 +80,7 @@
 
       if ( !success ) {
         errors.push(`Could not update Guest <strong><em>${name}</em></strong>.`);
+        useTrackEvent('RSVP Error', { props: { code: props.invitation.invite_code, guest: name } });
         gtag('event', 'rsvp_error', {invite: props.invitation.invite_code, guest: name});
       }
     }
