@@ -2,7 +2,7 @@ import Icons from 'unplugin-icons/vite';
 
 export default defineNuxtConfig({
 
-  modules: ['@nuxt/image-edge', '@nuxtjs/tailwindcss', 'nuxt-directus', 'nuxt-runtime-compiler', './modules/nuxt-image-generator'],
+  modules: ['@nuxt/image-edge', '@nuxtjs/tailwindcss', '@nuxtjs/plausible', 'nuxt-directus', 'nuxt-runtime-compiler', './modules/nuxt-image-generator'],
 
   vite: {
     plugins: [
@@ -10,6 +10,14 @@ export default defineNuxtConfig({
         autoInstall: true
       })
     ]
+  },
+
+  plausible: {
+    domain: 'killarneybicycletours.com',
+    apiHost: 'https://analytics.davidwaring.net',
+    autoPageviews: true,
+    hashMode: true,
+    trackLocalhost: true
   },
 
   directus: {
