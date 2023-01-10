@@ -9,7 +9,6 @@
     window.scrollTo(0, 0);
     useHead({ title: `RSVP - ${i.name}` });
     useTrackEvent('RSVP', { props: { code: i.invite_code, name: i.name } });
-    gtag('event', 'rsvp', {code: i.invite_code, name: i.name});
   }
 
   const onCancel = () => {

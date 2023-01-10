@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     apiHost: process.env.PLAUSIBLE_HOST,
     autoPageviews: true,
     hashMode: true,
-    trackLocalhost: true
+    trackLocalhost: false
   },
 
   directus: {
@@ -39,8 +39,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      rsvp_enabled: process.env.RSVP,
-      ga_id: process.env.GA_ID
+      rsvp_enabled: process.env.RSVP
     }
   }
 
