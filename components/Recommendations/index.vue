@@ -25,7 +25,10 @@
       <Card v-for="(rec) in recommendations[category]" :title="rec.name" class="recommendation">
         <div class="flex flex-wrap md:flex-nowrap gap-4 items-center">
           <div class="max-w-full lg:max-w-sm">
-            <p v-if="rec.location"><strong>Location:</strong> {{ rec.location }}</p>
+            <p v-if="rec.location">
+              <strong>Location:</strong>&nbsp;
+              <a :href="`https://www.google.com/maps/search/?api=1&query=${rec.location}`" target="_blank">{{ rec.location }}</a>
+            </p>
             <p v-if="rec.website && rec.website.length > 0">
               <strong>Website:</strong>
               <ul>
