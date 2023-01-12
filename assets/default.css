@@ -37,6 +37,10 @@ input, textarea {
   @apply p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-offset-2;
 }
 
+.well {
+  @apply bg-gray-200 p-4 border border-gray-300 shadow-inner rounded-md;
+}
+
 .card {
   @apply bg-gradient-to-b from-white to-gray-100 my-8 mx-1 sm:mx-2 md:mx-8 border border-white shadow-md rounded-md;
 }

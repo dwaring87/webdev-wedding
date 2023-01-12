@@ -3,6 +3,7 @@
     <HomeInfo />
     <HomeHero />
     <HomeSchedule />
+    <HomeStory />
     <HomeBikeTour />
   </div>
 </template>

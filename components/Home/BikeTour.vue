@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-8 mb-14">
-      <div class="bg-secondary overflow-hidden rounded-lg shadow-xl lg:grid lg:grid-cols-2 lg:gap-4">
+      <div class="max-w-5xl mx-auto bg-secondary overflow-hidden rounded-lg shadow-xl lg:grid lg:grid-cols-2 lg:gap-4">
         <div class="px-6 pt-10 pb-12 sm:px-16 sm:pt-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
           <div class="lg:self-center">
             <h2 class="text-3xl font-bold text-white sm:text-4xl">
