@@ -188,6 +188,34 @@ export const useCMS = () => {
   }
 
 
+  /**
+   * Get all of the recommendataions, grouped by category
+   * @returns Recommendations
+   */
+  const getRecommendations = async () => {
+    const { data } = useAsyncData('recommendations', async () => {
+      const recommendations = await getItems({
+        collection: 'recommendations',
+        params: {
+          fields: ['category', 'name', 'location', 'website.url', 'website.title', 'map.title', 'map.url', 'description', 'image']
+        }
+      });
+
+      // Group by category
+      let rtn = {};
+      if ( recommendations ) {
+        recommendations.forEach((rec) => {
+          if ( !rtn.hasOwnProperty(rec.category) ) rtn[rec.category] = [];
+          rtn[rec.category].push(rec);
+        })
+      }
+
+      return rtn;
+    });
+    return data;
+  }
+
+
   return {
     getAlert,
     getPages,
@@ -195,6 +223,7 @@ export const useCMS = () => {
     getDetails,
     getPhotos,
     getInvitation,
-    updateGuest
+    updateGuest,
+    getRecommendations
   }
 }

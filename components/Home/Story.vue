@@ -7,7 +7,7 @@
     <div class="well max-w-xl w-fit mx-auto">
       <div class="flex items-center mb-4">
         <RiQuestion class="text-4xl text-gray-400 mx-2 sm:mx-4 md:mx-8" />
-        <p class="font-semibold flex-grow mx-4">Bike tours in Killarney?</p>
+        <p class="font-semibold text-lg md:text-xl flex-grow mx-4">Bike tours in Killarney?</p>
       </div>
       <div class="flex flex-wrap sm:flex-nowrap items-center gap-4">
         <p class="lead">Wondering what bike tours in Killarney National Park have to do with our wedding? 

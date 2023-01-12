@@ -11,6 +11,9 @@ h2 {
 h3 {
   @apply text-lg md:text-lg lg:text-xl font-bold text-emerald-800 opacity-80;
 }
+h4 {
+  @apply font-semibold;
+}
 
 .container {
   @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-8;
@@ -39,32 +42,6 @@ input, textarea {
 
 .well {
   @apply bg-gray-200 p-4 border border-gray-300 shadow-inner rounded-md;
-}
-
-.card {
-  @apply bg-gradient-to-b from-white to-gray-100 my-8 mx-1 sm:mx-2 md:mx-8 border border-white shadow-md rounded-md;
-}
-.card-title {
-  @apply bg-gradient-to-b from-emerald-700 to-emerald-800 opacity-90 p-4 rounded-t-md;
-}
-.card-title h3 {
-  @apply text-white;
-}
-.card-body {
-  @apply px-4 pb-4;
-}
-
-.split {
-  @apply flex flex-wrap gap-x-4;
-}
-.split-left {
-  @apply max-w-full lg:max-w-sm;
-}
-.split-right {
-  @apply mx-auto;
-}
-.split-right img {
-  @apply mx-auto w-max max-h-36 md:max-h-48 lg:max-w-sm lg:max-h-fit !important;
 }
 
 .alert {
