@@ -66,7 +66,7 @@ export const getImage = (src, { modifiers = {}, baseURL, token } = {}) => {
   // During Development: return the original remote URL
   // otherwise return the generated local path
   return {
-    url: process.env.NODE_ENV === 'development' ? url : setImage(url, format)
+    url: process.env.NODE_ENV === 'prerender' ? setImage(url, format) : url
   }
 
 }
