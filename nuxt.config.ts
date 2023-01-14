@@ -39,7 +39,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      rsvp_enabled: process.env.RSVP
+      rsvp_enabled: process.env.RSVP,
+      geoip_api: process.env.GEOIP_API,
+      geoip_domain: process.env.PLAUSIBLE_DOMAIN
     }
   }
 
