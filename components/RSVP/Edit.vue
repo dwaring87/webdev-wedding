@@ -36,7 +36,6 @@
     window.scrollTo(0, 0);
 
     let edit_rsvp = false;
-    let edit_transportation = false;
     let errors = [];
 
     for ( const guest of props.invitation.guests ) {
@@ -47,7 +46,6 @@
       let email = container.getElementsByClassName('guest-email')[0].value;
       let rsvp_welcome = container.getElementsByClassName('guest-rsvp-welcome')[0].dataset.enabled === 'true';
       let rsvp = container.getElementsByClassName('guest-rsvp')[0].dataset.enabled === 'true';
-      let transportation = container.getElementsByClassName('guest-transportation')[0].dataset.enabled === 'true';
       let dietary_restrictions = [];
       let diet_els = container.getElementsByClassName('guest-diet');
       for ( let i = 0; i < diet_els.length; i++ ) {
@@ -58,16 +56,12 @@
       if ( rsvp || rsvp_welcome ) {
         edit_rsvp = true;
       }
-      if ( transportation ) {
-        edit_transportation = true;
-      }
 
       let success = await updateGuest(id, {
         name: name !== guest.name ? name : undefined, 
         email: email !== guest.email ? email : undefined,
         rsvp_welcome: rsvp_welcome !== guest.rsvp_welcome ? rsvp_welcome : undefined,
         rsvp: rsvp !== guest.rsvp ? rsvp : undefined,
-        transportation: transportation !== guest.transportation ? transportation : undefined,
         dietary_restrictions: 
           !guest.dietary_restrictions || 
           dietary_restrictions.length !== guest.dietary_restrictions.length || 
@@ -91,10 +85,7 @@
     else {
       success.value = "Guest Information Updated &mdash; Thank you!!";
       if ( edit_rsvp ) {
-        success.value += "<br /><br />We look forward to seeing you!  View the <em>Wedding Information</em> page for more details about the weekend.";
-      }
-      if ( edit_transportation ) {
-        success.value += "<br /><br />We'll keep you updated on details if we're able to arrange transportation to/from the wedding venue.";
+        success.value += "<br /><br />We look forward to seeing you!  View the <em>Wedding Information</em> page for more details about the weekend and the <em>Finger Lakes</em> page for a list of some of our favorite places in the area.";
       }
     }
   }
@@ -133,11 +124,6 @@
           <p>RSVP (Saturday Ceremony &amp; Reception):</p>
           <FormToggle class="guest-rsvp" :enabled="guest.rsvp" />
           <p class="info">Will you be attending the wedding ceremony and reception on Saturday?</p>
-        </div>
-        <div class="group">
-          <p>Transportation:</p>
-          <FormToggle class="guest-transportation" :enabled="guest.transportation" label_no="Not Interested" label_yes="Interested" />
-          <p class="info">Are you interested in possible transportation to and from the wedding venue?  We are looking into hiring a bus to bring guests to and from Ithaca.  Please let us know (for each person) if you're interested so we know how many seats we would need.  We'll reach out to those that are interested with the details.</p>
         </div>
         <div class="group">
           <p>Dietary Restrictions:</p>

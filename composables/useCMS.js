@@ -137,7 +137,7 @@ export const useCMS = () => {
       const invitations = await getItems({
         collection: 'invitations',
         params: {
-          fields: ['name', 'invite_code', 'guests.id', 'guests.name', 'guests.email', 'guests.rsvp_welcome', 'guests.rsvp', 'guests.transportation', 'guests.dietary_restrictions', 'guests.notes'],
+          fields: ['name', 'invite_code', 'guests.id', 'guests.name', 'guests.email', 'guests.rsvp_welcome', 'guests.rsvp', 'guests.dietary_restrictions', 'guests.notes'],
           filter: {
             invite_code: { '_eq': code }
           }

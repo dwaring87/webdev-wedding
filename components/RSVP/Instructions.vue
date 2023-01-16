@@ -19,7 +19,6 @@
         <ol>
           <li>Make sure to RSVP for each person</li>
           <li>RSVP for both the Friday Welcome Dinner and the Saturday Ceremony &amp; Reception</li>
-          <li>Select if you're interested in possible Transportation to/from the venue on Saturday</li>
           <li>Add any dietary restrictions</li>
           <li>Click the <strong>Save</strong> button at the bottom</li>
         </ol>
