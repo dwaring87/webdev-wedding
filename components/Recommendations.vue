@@ -12,9 +12,9 @@
       <!-- Category Index -->
       <div class="well mt-8">
         <h4 class="mb-2">Jump to Category:</h4>
-        <div class="inline sm:flex flex-wrap gap-x-4 justify-between">
-          <span class="block" v-for="(category) in Object.keys(recommendations)">
-            <a :href="`#category-${category}`">{{ category }}</a>
+        <div class="inline sm:flex flex-wrap gap-x-2 justify-between">
+          <span class="block my-3 bg-cyan-800 rounded-md px-2 w-fit" v-for="(category) in Object.keys(recommendations)">
+            <a :href="`#category-${category}`" style="text-decoration: none; color: #fff !important">{{ category }}</a>
           </span>
         </div>
       </div>
