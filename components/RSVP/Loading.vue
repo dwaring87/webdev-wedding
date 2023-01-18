@@ -8,7 +8,8 @@
       default: "Loading..."
     },
     error: String,
-    success: String,
+    success: Boolean,
+    attending: Boolean,
     cancelLabel: {
       type: String,
       default: "Back"
@@ -55,7 +56,21 @@
 
     <!-- Success Message -->
     <div class="w-full my-8" v-if="success">
-      <div class="success mx-8" v-html="success"></div>
+      <div class="success mx-8">
+        <p class="mx-auto w-fit font-bold text-md md:text-lg">Guest Information Updated &mdash; Thank you!!</p>
+        <div v-if="attending">
+          <br />
+          <p class="mx-auto w-fit font-semibold">We look forward to seeing you!</p>
+          <br />
+          <p>For more information, check out these pages on our website:</p>
+          <ul class='list-disc ml-8'>
+            <li>The <NuxtLink class='underline font-bold' to='/page/hotels'>Hotels</NuxtLink> page has information about places to stay in the area. <strong>If you haven't booked a place to stay yet, we <em>highly recommend</em> you do so soon.</strong></li>
+            <li>The <NuxtLink class='underline font-bold' to='/page/wedding-info'>Wedding Information</NuxtLink> page has more details about the weekend.</li>
+            <li>The <NuxtLink class='underline font-bold' href='/page/finger-lakes'>Finger Lakes</NuxtLink> page has a list of some of our favorite places in the area.</li>
+          </ul>
+        </div>
+      </div>
+      <Image class="mx-auto mt-8 max-w-sm max-h-sm rounded-md shadow-md" d-key="rsvp-success" />
       <br />
       <button class="btn-dark mx-auto" @click="emit('continue')" v-html="continueLabel"></button>
     </div>

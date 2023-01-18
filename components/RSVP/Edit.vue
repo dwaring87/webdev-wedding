@@ -28,15 +28,16 @@
 
   const saving = ref(false);
   const error = ref();
-  const success = ref();
+  const success = ref(false);
+  const attending = ref(false);
   const save = async () => {
     saving.value = true;
     error.value = undefined;
-    success.value = undefined;
-    window.scrollTo(0, 0);
-
-    let edit_rsvp = false;
+    success.value = false;
+    attending.value = false;
     let errors = [];
+
+    window.scrollTo(0, 0);
 
     for ( const guest of props.invitation.guests ) {
       let id = guest.id;
@@ -54,7 +55,7 @@
       let notes = container.getElementsByClassName('guest-notes')[0].value;
 
       if ( rsvp || rsvp_welcome ) {
-        edit_rsvp = true;
+        attending.value = true;
       }
 
       let success = await updateGuest(id, {
@@ -83,10 +84,7 @@
       error.value += `<br /><br />Please try again later.  If the issue persists, please reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Errors">${email.value}</a>.`;
     }
     else {
-      success.value = "Guest Information Updated &mdash; Thank you!!";
-      if ( edit_rsvp ) {
-        success.value += "<br /><br />We look forward to seeing you!  View the <em>Wedding Information</em> page for more details about the weekend and the <em>Finger Lakes</em> page for a list of some of our favorite places in the area.";
-      }
+      success.value = true;
     }
   }
 </script>
@@ -99,9 +97,10 @@
       loading="Updating Guest Information..."
       :error="error"
       :success="success"
-      @cancel="saving=false"
+      :attending="attending"
       continueLabel="Wedding Information"
       @continue="finish"
+      @cancel="saving=false"
     />
 
     <div v-show="!saving">
