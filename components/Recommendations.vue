@@ -1,6 +1,17 @@
 <script setup>
+  import RiUp from '~icons/ri/arrow-up-s-line';
   const { getRecommendations } = useCMS();
   const recommendations = await getRecommendations();
+
+  const scroll = (id) => {
+    const offsets = document.getElementById(id).getBoundingClientRect();
+    window.scrollBy({
+      top: offsets.top-70,
+      left: 0,
+      behavior: 'smooth'
+    });
+    history.replaceState(history.state, null, `#${id}`);
+  }
 </script>
 
 <template>
@@ -10,11 +21,11 @@
     <div v-if="recommendations">
 
       <!-- Category Index -->
-      <div class="well mt-8">
+      <div id="toc" class="well mt-8">
         <h4 class="mb-2">Jump to Category:</h4>
         <div class="inline sm:flex flex-wrap gap-x-2 justify-between">
-          <span class="block my-3 bg-cyan-800 rounded-md px-2 w-fit" v-for="(category) in Object.keys(recommendations)">
-            <a :href="`#category-${category}`" style="text-decoration: none; color: #fff !important">{{ category }}</a>
+          <span v-for="(category) in Object.keys(recommendations)" class="block my-3 bg-cyan-800 text-white rounded-md px-2 cursor-pointer w-fit" @click="scroll(category)">
+            {{ category }}
           </span>
         </div>
       </div>
@@ -23,7 +34,8 @@
       <div v-for="(category) in Object.keys(recommendations)">
 
         <!-- Category Header -->
-        <h2 :id="`category-${category}`">{{ category }}</h2>
+        <RiUp class="bg-gray-200 rounded-md translate-y-1 cursor-pointer float-right" @click="scroll('toc')" />
+        <h2 :id="category">{{ category }}</h2>
 
         <!-- Recommendation Card -->
         <Card v-for="(rec) in recommendations[category]" :title="rec.name" class="recommendation">
