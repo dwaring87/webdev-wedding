@@ -51,6 +51,9 @@ input, textarea {
   @apply bg-emerald-600 text-emerald-100 border-2 border-emerald-800 rounded-md shadow-md p-4;
 }
 
+ul {
+  @apply list-disc ml-8;
+}
 ol {
   @apply list-decimal ml-8;
 }
