@@ -24,7 +24,13 @@ export default defineNuxtModule({
 
     // Set runtime options
     const cache = resolve(nuxt.options.rootDir, ".static_images.txt");
-    nuxt.options.runtimeConfig.public.nuxt_image_generator = { root_dir: nuxt.options.rootDir, cache, output_dir, image_dir };
+    nuxt.options.runtimeConfig.public.nuxt_image_generator = {
+      is_static: nuxt.options._generate,
+      root_dir: nuxt.options.rootDir,
+      cache,
+      output_dir,
+      image_dir
+    };
 
     // Remove existing cache file
     fs.rm(cache, { force: true });
@@ -42,10 +48,10 @@ export default defineNuxtModule({
 const generateImages = async (nuxt) => {
 
   // Get runtime options
-  const { cache, root_dir, output_dir, image_dir } = nuxt.options.runtimeConfig.public.nuxt_image_generator;
+  const { is_static, root_dir, cache, output_dir, image_dir } = nuxt.options.runtimeConfig.public.nuxt_image_generator;
 
   // Generate the during nuxt static generation
-  if ( nuxt.options._generate ) {
+  if ( is_static ) {
 
     // Read cache file and parse into images object
     const images = {};

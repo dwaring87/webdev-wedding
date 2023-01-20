@@ -48,6 +48,8 @@ const transformsGenerator = (transforms) => {
 }
 
 export const getImage = (src, { modifiers = {}, baseURL, token } = {}) => {
+  // TEMP: remove these props when nuxt image supports static image generation
+  const { nuxt_image_generator:props } = useRuntimeConfig();
 
   // Base URL is a required provider option (set in nuxt.config file)
   if ( !baseURL || baseURL === '' ) {
@@ -63,10 +65,10 @@ export const getImage = (src, { modifiers = {}, baseURL, token } = {}) => {
     { transforms, access_token: token }
   );
 
-  // During Development: return the original remote URL
-  // otherwise return the generated local path
+  // TEMP: return just the remote url when nuxt image supports static image generation
+  // Use the static url when nuxt generate is used, otherwise use remote url
   return {
-    url: process.env.NODE_ENV === 'prerender' ? setImage(url, format) : url
+    url: props.is_static ? setImage(url, format) : url
   }
 
 }
