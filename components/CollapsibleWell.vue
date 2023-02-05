@@ -1,6 +1,6 @@
 <script setup>
-  import RiArrowUp from '~icons/ri/arrow-up-s-fill';
-  import RiArrowDown from '~icons/ri/arrow-down-s-fill';
+  import RiExpand from '~icons/ri/add-circle-fill';
+  import RiCollapse from '~icons/ri/indeterminate-circle-fill';
 
   const props = defineProps({
     title: String
@@ -11,10 +11,15 @@
 
 <template>
   <div class="well">
-    <div class="w-full cursor-pointer flex justify-between items-center" @click="visible = !visible">
+    <div class="w-full cursor-pointer flex justify-between items-center text-emerald-800/60 hover:text-emerald-800/80" @click="visible = !visible">
       <h3>{{ title }}</h3>
-      <RiArrowUp v-if="!visible" class="text-2xl text-gray-600" />
-      <RiArrowDown v-else class="text-2xl text-gray-600" />
+      <div class="relative h-full">
+        &nbsp;
+        <Transition name="fade">
+          <RiExpand v-if="!visible" class="absolute top-1 right-2 text-xl" />
+          <RiCollapse v-else class="absolute top-1 right-2 text-xl" />
+        </Transition>
+      </div>
     </div>
     <Transition name="slide-fade">
       <div v-if="visible">
@@ -25,6 +30,13 @@
 </template>
 
 <style scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+  }
+
   .slide-fade-enter-active {
     transition: all 0.5s ease-out;
   }
