@@ -1,10 +1,9 @@
 <script setup>
-  import RiCalendar from '~icons/ri/calendar-event-fill';
 </script>
 
 <template>
   <div class="container">
-    <div class="max-w-2xl mx-auto bg-gray-50 shadow-sm">
+    <div class="max-w-2xl mx-auto bg-gray-50 drop-shadow-xl">
 
       <hr class="w-full h-[2px] bg-gray-300 mt-24 mb-12" />
 

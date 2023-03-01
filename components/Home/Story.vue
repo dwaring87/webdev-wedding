@@ -6,7 +6,7 @@
   <div class="container mb-24">
     <div class="well max-w-xl w-fit mx-auto">
       <div class="flex items-center mb-4">
-        <RiQuestion class="text-4xl text-gray-400 mx-2 sm:mx-4 md:mx-8" />
+        <RiQuestion class="text-4xl text-gray-400 mx-2 sm:mx-4 md:mx-8 min-w-[30px]" />
         <p class="font-semibold text-lg md:text-xl flex-grow mx-4">Bike tours in Killarney?</p>
       </div>
       <div class="flex flex-wrap sm:flex-nowrap items-center gap-4">
