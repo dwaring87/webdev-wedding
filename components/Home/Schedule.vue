@@ -15,6 +15,7 @@
           <p class="text-lg font-bold text-emerald-800">Friday, September 15th</p>
           <p class="font-bold">Welcome Dinner</p>
           <p class="font-semibold text-cyan-800">Everyone is invited!</p>
+          <p>5PM until dark</p>
           <p>Taughannock Falls State Park</p>
           <p>Trumansburg, NY</p>
         </div>
@@ -27,6 +28,7 @@
         <div class="flex-grow text-center">
           <p class="text-lg font-bold text-emerald-800">Saturday, September 16th</p>
           <p class="font-bold">Ceremony &amp; Reception</p>
+          <p>4PM until late</p>
           <p>Silver Queen Farm</p>
           <p>Trumansburg, NY</p>
         </div>
