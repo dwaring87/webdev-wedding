@@ -6,6 +6,7 @@
     invitation: Object
   });
   const emit = defineEmits(['cancel']);
+  const guests = ref(JSON.parse(JSON.stringify(props.invitation.guests)));
 
   const email = await getDetails("contact_email");
   const DIET = {
@@ -16,6 +17,19 @@
     nut: "Nut Allergy",
     dairy: "Dairy Allergy",
     other: "Other"
+  }
+  const updateDietaryRestriction = (guest, key, enabled) => {
+    if ( enabled ) {
+      if ( guest.dietary_restrictions ) {
+        guest.dietary_restrictions.push(key);
+      }
+      else {
+        guest.dietary_restrictions = [key];
+      }
+    }
+    else {
+      guest.dietary_restrictions = guest.dietary_restrictions.filter((item) => item !== key);
+    }
   }
   
   const cancel = () => {
@@ -39,45 +53,27 @@
 
     window.scrollTo(0, 0);
 
-    for ( const guest of props.invitation.guests ) {
-      let id = guest.id;
-      let container = document.getElementById(`guest-container-${id}`);
-
-      let name = container.getElementsByClassName('guest-name')[0].value;
-      let email = container.getElementsByClassName('guest-email')[0].value;
-      let rsvp_welcome = container.getElementsByClassName('guest-rsvp-welcome')[0].dataset.enabled === 'true';
-      let rsvp = container.getElementsByClassName('guest-rsvp')[0].dataset.enabled === 'true';
-      let dietary_restrictions = [];
-      let diet_els = container.getElementsByClassName('guest-diet');
-      for ( let i = 0; i < diet_els.length; i++ ) {
-        if ( diet_els[i].dataset.enabled && diet_els[i].dataset.enabled === 'true' ) dietary_restrictions.push(diet_els[i].dataset.code);
+    guests.value.forEach(async (guest, index) => {
+      const original = props.invitation.guests[index];
+      const updated_guest_props = {
+        name: guest.name !== original.name ? guest.name : undefined,
+        email: guest.email !== original.email ? guest.email : undefined,
+        rsvp_welcome: guest.rsvp_welcome !== original.rsvp_welcome ? guest.rsvp_welcome : undefined,
+        rsvp: guest.rsvp !== original.rsvp ? guest.rsvp : undefined,
+        dietary_restrictions: JSON.stringify(guest.dietary_restrictions) !== JSON.stringify(original.dietary_restrictions) ? guest.dietary_restrictions : undefined,
+        notes: guest.notes !== original.notes ? guest.notes : undefined
       }
-      let notes = container.getElementsByClassName('guest-notes')[0].value;
-
-      if ( rsvp || rsvp_welcome ) {
+      if ( guest.rsvp || guest.rsvp_welcome ) {
         attending.value = true;
       }
 
-      let success = await updateGuest(id, {
-        name: name !== guest.name ? name : undefined, 
-        email: email !== guest.email ? email : undefined,
-        rsvp_welcome: rsvp_welcome !== guest.rsvp_welcome ? rsvp_welcome : undefined,
-        rsvp: rsvp !== guest.rsvp ? rsvp : undefined,
-        dietary_restrictions: 
-          !guest.dietary_restrictions || 
-          dietary_restrictions.length !== guest.dietary_restrictions.length || 
-          !dietary_restrictions.every((v, i) => v === guest.dietary_restrictions[i]) 
-            ? dietary_restrictions 
-            : undefined,
-        notes: notes !== guest.notes ? notes : undefined
-      });
+      let success = await updateGuest(guest.id, updated_guest_props);
       await sleep(500);
-
       if ( !success ) {
         errors.push(`Could not update Guest <strong><em>${name}</em></strong>.`);
-        useTrackEvent('RSVP Error', { props: { code: props.invitation.invite_code, guest: name } });
+        useTrackEvent('RSVP Error', { props: { code: props.invitation.invite_code, guest: guest.name } });
       }
-    }
+    });
 
     if ( errors.length > 0 ) {
       error.value = errors.join(`<br />`);
@@ -104,35 +100,37 @@
     />
 
     <div v-show="!saving">
-      <div class="mx-1 sm:mx-2 md:mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="`guest-container-${guest.id}`" v-for="(guest) in invitation.guests" :key="guest.id">
+      <div class="mx-1 sm:mx-2 md:mx-4 mt-4 mb-8 px-4 bg-gray-100 border border-gray-400 rounded-md shadow" :id="`guest-container-${guest.id}`" v-for="(guest) in guests" :key="guest.id">
         <div class="group">
           <p>Name:</p>
-          <input class="guest-name" :value="guest.name" />
+          <input class="guest-name" v-model="guest.name" @input="onInput" />
         </div>
         <div class="group">
           <p>Email:</p>
-          <input class="guest-email" :value="guest.email" />
+          <input class="guest-email" v-model="guest.email" />
           <p class="info">Enter your email to receive updates from us about the wedding</p>
         </div>
         <div class="group">
           <p>RSVP (Friday Welcome Dinner):</p>
-          <FormToggle class="guest-rsvp-welcome" :enabled="guest.rsvp_welcome" />
+          <FormToggle class="guest-rsvp-welcome" :enabled="guest.rsvp_welcome" @toggle="(s) => guest.rsvp_welcome = s" />
           <p class="info">Will you be attending the welcome dinner (potluck) the Friday evening before the wedding?</p>
         </div>
         <div class="group">
           <p>RSVP (Saturday Ceremony &amp; Reception):</p>
-          <FormToggle class="guest-rsvp" :enabled="guest.rsvp" />
+          <FormToggle class="guest-rsvp" :enabled="guest.rsvp" @toggle="(s) => guest.rsvp = s" />
           <p class="info">Will you be attending the wedding ceremony and reception on Saturday?</p>
         </div>
         <div class="group">
           <p>Dietary Restrictions:</p>
           <div class="flex flex-wrap gap-2">
-            <FormCheck class="guest-diet" v-for="(value, key) in DIET" :code="key" :label="value" :enabled="guest.dietary_restrictions && guest.dietary_restrictions.includes(key)" />
+            <FormCheck class="guest-diet" v-for="(value, key) in DIET" :code="key" :label="value" 
+              :enabled="guest.dietary_restrictions && guest.dietary_restrictions.includes(key)"
+              @check="(s) => updateDietaryRestriction(guest, key, s)" />
           </div>
         </div>
         <div class="group">
           <p>Comments:</p>
-          <textarea class="guest-notes" rows="5">{{ guest.notes }}</textarea>
+          <textarea class="guest-notes" v-model="guest.notes" rows="5"></textarea>
           <p class="info">Any other information we should know?</p>
         </div>
       </div>

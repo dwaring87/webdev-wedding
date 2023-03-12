@@ -70,7 +70,7 @@
           </ul>
         </div>
       </div>
-      <Image class="mx-auto mt-8 max-w-sm max-h-sm rounded-md shadow-md" d-key="rsvp-success" />
+      <Image d-key="rsvp-success" class="mx-auto mt-8 max-w-sm max-h-sm rounded-md shadow-md" />
       <br />
       <button class="btn-dark mx-auto" @click="emit('continue')" v-html="continueLabel"></button>
     </div>
