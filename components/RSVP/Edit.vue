@@ -53,8 +53,9 @@
 
     window.scrollTo(0, 0);
 
-    guests.value.forEach(async (guest, index) => {
-      const original = props.invitation.guests[index];
+    for ( let i = 0; i < guests.value.length; i++ ) {
+      const guest = guests.value[i];
+      const original = props.invitation.guests[i];
       const updated_guest_props = {
         name: guest.name !== original.name ? guest.name : undefined,
         email: guest.email !== original.email ? guest.email : undefined,
@@ -70,10 +71,10 @@
       let success = await updateGuest(guest.id, updated_guest_props);
       await sleep(500);
       if ( !success ) {
-        errors.push(`Could not update Guest <strong><em>${name}</em></strong>.`);
+        errors.push(`Could not update Guest <strong><em>${guest.name}</em></strong>.`);
         useTrackEvent('RSVP Error', { props: { code: props.invitation.invite_code, guest: guest.name } });
       }
-    });
+    };
 
     if ( errors.length > 0 ) {
       error.value = errors.join(`<br />`);

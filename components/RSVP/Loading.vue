@@ -55,7 +55,7 @@
     </div>
 
     <!-- Success Message -->
-    <div class="w-full my-8" v-if="success">
+    <div class="w-full my-8" v-show="success">
       <div class="success mx-8">
         <p class="mx-auto w-fit font-bold text-md md:text-lg">Guest Information Updated &mdash; Thank you!!</p>
         <div v-if="attending">
