@@ -70,7 +70,8 @@
           </ul>
         </div>
       </div>
-      <Image d-key="rsvp-success" class="mx-auto mt-8 max-w-sm max-h-sm rounded-md shadow-md" />
+      <img src="https://cms.killarneybicycletours.com/assets/6b31f53a-92cd-4fe3-9619-d46b45e11f00?width=600&format=png&access_token=v7kbo8RoH0gFISVa2qUhunkR1AGQVLrf"
+        class="mx-auto mt-8 max-w-sm max-h-sm rounded-md shadow-md" />
       <br />
       <button class="btn-dark mx-auto" @click="emit('continue')" v-html="continueLabel"></button>
     </div>
