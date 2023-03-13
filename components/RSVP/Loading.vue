@@ -66,7 +66,7 @@
           <ul class='list-disc ml-8'>
             <li>The <NuxtLink class='underline font-bold' to='/page/hotels'>Hotels</NuxtLink> page has information about places to stay in the area. <strong>If you haven't booked a place to stay yet, we <em>highly recommend</em> you do so soon.</strong></li>
             <li>The <NuxtLink class='underline font-bold' to='/page/wedding-info'>Wedding Information</NuxtLink> page has more details about the weekend.</li>
-            <li>The <NuxtLink class='underline font-bold' href='/page/finger-lakes'>Finger Lakes</NuxtLink> page has a list of some of our favorite places in the area.</li>
+            <li>The <NuxtLink class='underline font-bold' to='/page/finger-lakes'>Finger Lakes</NuxtLink> page has a list of some of our favorite places in the area.</li>
           </ul>
         </div>
       </div>
