@@ -56,7 +56,7 @@
 
     <!-- Success Message -->
     <div class="w-full my-8" v-show="success">
-      <div class="success mx-8">
+      <div class="success max-w-lg mx-auto">
         <p class="mx-auto w-fit font-bold text-md md:text-lg">Guest Information Updated &mdash; Thank you!!</p>
         <div v-if="attending">
           <br />
@@ -71,7 +71,7 @@
         </div>
       </div>
       <img src="https://cms.killarneybicycletours.com/assets/6b31f53a-92cd-4fe3-9619-d46b45e11f00?width=600&format=png&access_token=v7kbo8RoH0gFISVa2qUhunkR1AGQVLrf"
-        class="mx-auto mt-8 max-w-sm max-h-sm rounded-md shadow-md" />
+        class="mx-auto mt-8 w-full max-w-sm max-h-sm rounded-md shadow-md" />
       <br />
       <button class="btn-dark mx-auto" @click="emit('continue')" v-html="continueLabel"></button>
     </div>
