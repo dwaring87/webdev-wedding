@@ -155,13 +155,13 @@ export const useCMS = () => {
    * Update the Guest Properties
    * @param id The Guest ID
    * @param properties The Updated Guest Properties
-   * @returns success flag
+   * @returns { success, error }
    */
   const updateGuest = async (id, properties) => {
     try {
       if ( !id || id === '' ) {
         console.log("ERROR: Guest ID is required!");
-        return false;
+        return { success: false, error: "Guest ID not provided" };
       }
 
       for ( const key in properties ) {
@@ -178,12 +178,13 @@ export const useCMS = () => {
         id: id,
         item: properties,
       });
-      return resp && resp.id === id;
+      const success = resp && resp.id === id;
+      return success ? { success: true } : { success: false, error: `Invalid API Response: ${JSON.stringify(resp)}` }
     } 
     catch (e) {
       console.log("ERROR: Could not update Guest!");
       console.log(e);
-      return false;
+      return { success: false, error: e }
     }
   }
 

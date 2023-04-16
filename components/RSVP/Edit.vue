@@ -68,11 +68,12 @@
         attending.value = true;
       }
 
-      let success = await updateGuest(guest.id, updated_guest_props);
+      useTrackEvent('RSVP Submit', { props: { code: props.invitation.invite_code, guest: guest.name, ...updated_guest_props } });
+      let { success, error } = await updateGuest(guest.id, updated_guest_props);
       await sleep(500);
       if ( !success ) {
-        errors.push(`Could not update Guest <strong><em>${guest.name}</em></strong>.`);
-        useTrackEvent('RSVP Error', { props: { code: props.invitation.invite_code, guest: guest.name } });
+        errors.push(`Could not update Guest <strong><em>${guest.name}</em></strong> [${error}].`);
+        useTrackEvent('RSVP Error', { props: { code: props.invitation.invite_code, guest: guest.name, error } });
       }
     };
 
@@ -81,6 +82,7 @@
       error.value += `<br /><br />Please try again later.  If the issue persists, please reach out to us directly or email us at <a style="text-decoration: underline" href="mailto:${email.value}?subject=[Contact] RSVP Errors">${email.value}</a>.`;
     }
     else {
+      useTrackEvent('RSVP Success', { props: { code: props.invitation.invite_code, name: props.invitation.name } });
       success.value = true;
     }
   }
@@ -124,7 +126,7 @@
         <div class="group">
           <p>Dietary Restrictions:</p>
           <div class="flex flex-wrap gap-2">
-            <FormCheck class="guest-diet" v-for="(value, key) in DIET" :code="key" :label="value" 
+            <FormCheck class="guest-diet" v-for="(value, key) in DIET" :key="key" :code="key" :label="value" 
               :enabled="guest.dietary_restrictions && guest.dietary_restrictions.includes(key)"
               @check="(s) => updateDietaryRestriction(guest, key, s)" />
           </div>
