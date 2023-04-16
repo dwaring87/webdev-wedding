@@ -133,7 +133,7 @@ export const useCMS = () => {
    * @returns Invitation and Guests
    */
   const getInvitation = async (code) => {
-    const { data } = useAsyncData(`invitation-${code}`, async () => {
+    const { data } = await useAsyncData(`invitation-${code}`, async () => {
       const invitations = await getItems({
         collection: 'invitations',
         params: {
@@ -193,7 +193,7 @@ export const useCMS = () => {
    * @returns Recommendations
    */
   const getRecommendations = async () => {
-    const { data } = useAsyncData('recommendations', async () => {
+    const { data } = await useAsyncData('recommendations', async () => {
       const recommendations = await getItems({
         collection: 'recommendations',
         params: {
