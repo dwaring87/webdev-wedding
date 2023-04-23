@@ -59,8 +59,8 @@
       const updated_guest_props = {
         name: guest.name !== original.name ? guest.name : undefined,
         email: guest.email !== original.email ? guest.email : undefined,
-        rsvp_welcome: guest.rsvp_welcome !== original.rsvp_welcome ? guest.rsvp_welcome : undefined,
-        rsvp: guest.rsvp !== original.rsvp ? guest.rsvp : undefined,
+        rsvp_welcome: guest.rsvp_welcome,
+        rsvp: guest.rsvp,
         dietary_restrictions: JSON.stringify(guest.dietary_restrictions) !== JSON.stringify(original.dietary_restrictions) ? guest.dietary_restrictions : undefined,
         notes: guest.notes !== original.notes ? guest.notes : undefined
       }
