@@ -39,7 +39,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      rsvp_enabled: process.env.RSVP
+      rsvp_enabled: process.env.RSVP,
+      rsvp_closed: process.env.RSVP_CLOSED
     }
   }
 

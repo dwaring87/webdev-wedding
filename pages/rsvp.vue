@@ -1,4 +1,5 @@
 <script setup>
+  const { rsvp_closed } = useRuntimeConfig();
   const loaded = ref(false);
   const invitation = ref();
   const code = ref();
@@ -32,7 +33,8 @@
 
 <template>
   <div class="page">
-    <div class="relative bg-white border-2 border-gray-100 rounded-md shadow-xl">
+    <RSVPClosed v-if="rsvp_closed && rsvp_closed === 'true'" />
+    <div v-else class="relative bg-white border-2 border-gray-100 rounded-md shadow-xl">
       <div class="grid grid-cols-1 lg:grid-cols-3">
         <RSVPInstructions :invitationFound="!!invitation" class="relative overflow-hidden" />
         <div v-if="loaded" class="py-10 px-4 md:px-8 sm:px-10 lg:col-span-2 xl:p-12">
