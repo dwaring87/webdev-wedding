@@ -1,5 +1,7 @@
 <script setup>
   import RiClose from '~icons/ri/close-circle-fill';
+  const { getDetails } = useCMS();
+  const email = await getDetails("contact_email");
 </script>
 
 <template>
@@ -10,7 +12,9 @@
       </h2>
     </div>
     <div class="bg-white p-8 rounded-b-md">
-      <p>If you need to make a change to your RSVP, please contact us directly.</p>
+      <p>If you need to make a change to your RSVP, please contact us directly.  You can email us 
+        at <a :href="`mailto:${email}?subject=[Contact] RSVP Help`">{{ email }}</a>.
+      </p>
       <p class="mt-8 ml-8">&mdash;&nbsp;&nbsp;Marissa &amp; David</p>
     </div>
   </div>
